@@ -19,3 +19,5 @@
 @import url("../blocks/titlefield/titlefield.css");
 @import url("../blocks/titlefield/__image/titlefield__image.css");
 @import url("../blocks/titlefield/__title/titlefield__title.css");
+@import url("../blocks/footer/__content/footer__content.css");
+@import url("../blocks/footer/footer.css");
