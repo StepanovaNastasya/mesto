@@ -1,0 +1,10 @@
+.titlefield__image {
+    background-image: url("../../../images/heart.svg");
+    width: 22px;
+    height:19px;
+}
+
+.titlefield__image:hover {
+    opacity: 0.5;
+    transition: 0.5s;
+}
