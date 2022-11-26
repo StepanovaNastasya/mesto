@@ -3,3 +3,12 @@
 @import url("../blocks/page/page.css");
 @import url("../blocks/logo/logo.css");
 @import url("../blocks/header/header.css");
+@import url("../blocks/profile/profile.css");
+@import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__button/profile__button.css");
+@import url("../blocks/profile/__info/profile__info.css");
+@import url("../blocks/form/__profession/form__profession.css");
+@import url("../blocks/form/__name/form__name.css");
+@import url("../blocks/form/__button/form__button.css");
+@import url("../blocks/form/__container/form__container.css");
+@import url("../blocks/profile/__container/profile__container.css");

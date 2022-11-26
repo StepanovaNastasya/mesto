@@ -1,0 +1,37 @@
+.form__name {
+  margin: 0;
+  padding: 0; 
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1.14;
+}
+
+
+@media  screen and (min-width: 357px) and (max-width: 769px){
+  .form__name {
+    font-size: 36px;
+    line-height: 1.22;
+    text-align: center;
+    margin-top: 25px;
+    max-width: 337px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+} 
+
+@media  screen and (max-width: 356px){
+    .form__name {
+      font-size: 27px;
+      line-height: 1.22;
+      text-align: center;
+      margin-top: 22.25px;
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  } 
+
+
+
