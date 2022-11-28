@@ -13,24 +13,24 @@
 } 
 
 @media  screen and (min-width: 357px) and (max-width: 769px){
-    .form__profession {
-      font-size: 16px;
-      margin: 14px auto 0;
-      text-align: center;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-  } 
+  .form__profession {
+    font-size: 16px;
+    margin: 14px auto 0;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+} 
 @media  screen and (max-width: 356px){
-    .form__profession {
-      font-size: 14px;
-      margin: 14px auto 0;
-      line-height: 1.21;
-      text-align: center;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  } 
+  .form__profession {
+    font-size: 14px;
+    margin: 14px auto 0;
+    line-height: 1.21;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+} 
   

@@ -21,17 +21,17 @@
 } 
 
 @media  screen and (max-width: 356px){
-    .form__name {
-      font-size: 27px;
-      line-height: 1.22;
-      text-align: center;
-      margin-top: 25px;
-      max-width: 320px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  } 
+  .form__name {
+    font-size: 27px;
+    line-height: 1.22;
+    text-align: center;
+    margin-top: 25px;
+    max-width: 320px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+} 
 
 
 

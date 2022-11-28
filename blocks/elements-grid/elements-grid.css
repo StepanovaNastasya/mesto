@@ -12,16 +12,16 @@
 }
 
 @media screen and (min-width: 400px) and (max-width: 920px) {
-    .elements-grid {
-        grid-template-columns: repeat(auto-fit, 282px);
-        grid-template-rows: repeat(auto-fit, 361px);
-    }   
+  .elements-grid {
+    grid-template-columns: repeat(auto-fit, 282px);
+    grid-template-rows: repeat(auto-fit, 361px);
+  }   
 }
 
 @media screen and (max-width: 399px) {
-    .elements-grid {
-        display: block;
-        width: 282px;
-        min-height: 361px;
-    }    
+  .elements-grid {
+    display: block;
+    width: 282px;
+    min-height: 361px;
+  }    
 }

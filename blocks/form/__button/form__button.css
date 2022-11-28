@@ -12,23 +12,23 @@
 }
 
 .form__button:hover {
-    opacity: 0.6;
-    transition: 0.5s;
+  opacity: 0.6;
+  transition: 0.5s;
 }
 
 @media  screen and (min-width: 357px) and (max-width: 769px){
-    .form__button{
-        margin-left: 15px;
-        align-self:flex-end;
-    }
+  .form__button{
+    margin-left: 15px;
+    align-self:flex-end;
+  }
 }
 
 @media  screen and (max-width: 356px)  {
-    .form__button {
-        margin-left: 10px;
-        align-self:flex-end;
-        width: 16px;
-        height: 16px;
-        background-size: 7.5px; 
-    }
+  .form__button {
+    margin-left: 10px;
+    align-self:flex-end;
+    width: 16px;
+    height: 16px;
+    background-size: 7.5px; 
+  }
 } 

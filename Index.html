@@ -2,93 +2,94 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mesto</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="./pages/index.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mesto</title>
 </head>
 
 <body class="page">
-    <div class="popup__bg">
-        <div class="popup__container">
-        <img class="popup__close" src="./images/Close Icon.png" alt="закрыть">
-         <form class="popup">
-          <h3 class="popup__title">Редактировать профиль</h3>
-          <fieldset class="popup__input-container">
-            <input type="text" placeholder="Имя" class="popup__name">
-            <input type="text" placeholder="Профессия" class="popup__profession">
-          </fieldset>
-          <button type="submit" class="popup__savebutton">Сохранить</button>
-         </form>
-        </div>
-    </div>    
+  <div class="popup__bg">
+    <div class="popup__container">
+      <img class="popup__close" src="./images/Close Icon.png" alt="закрыть">
+      <form class="popup">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <fieldset class="popup__input-container">
+          <input type="text" placeholder="Имя" class="popup__name">
+          <input type="text" placeholder="Профессия" class="popup__profession">
+        </fieldset>
+        <button type="submit" class="popup__savebutton">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <header class="header">
     <img class="logo" src="./images/Logo.svg" alt="логотип">
   </header>
   <main>
-        <section class="profile">
-            <div class="profile__container">
-                <img class="profile__avatar" src="./images/kusto.jpg" alt="аватар">
-                <form class="profile__info">
-                    <div class="form__container">
-                        <p class="form__name">Жак-Ив Кусто</p>
-                        <a class="form__button" href="#"></a>
-                    </div>
-                    <p class="form__profession">Исследователь океана</p>
-                </form>
-            </div>
-            <button type="submit" class="profile__button"></button>
-        </section>
-        <section class="elements">
-            <ul class="elements-grid">
-                <li class="elements-grid__item">
-                    <img class="elements-grid__image" src="./images/cyprus.jpg" alt="Кипр">
-                    <div class="titlefield">
-                        <h3 class="titlefield__title">Кипр</h3>
-                        <a class="titlefield__image" href="#"></a>
-                    </div>
-                </li>
-                <li class="elements-grid__item">
-                    <img class="elements-grid__image" src="./images/georgia.jpg" alt="грузия">
-                    <div class="titlefield">
-                        <h3 class="titlefield__title">Грузия</h3>
-                        <a class="titlefield__image" href="#"></a>
-                    </div>
-                </li>
-                <li class="elements-grid__item">
-                    <img class="elements-grid__image" src="./images/paris.jpg">
-                    <div class="titlefield">
-                        <h3 class="titlefield__title">Париж</h3>
-                        <a class="titlefield__image" href="#"></a>
-                    </div>
-                </li>
-                <li class="elements-grid__item">
-                    <img class="elements-grid__image" src="./images/hamburg-docks.jpg" alt="гамбург">
-                    <div class="titlefield">
-                        <h3 class="titlefield__title">Гамбург</h3>
-                        <a class="titlefield__image" href="#"></a>
-                    </div>
-                </li>
-                <li class="elements-grid__item">
-                    <img class="elements-grid__image" src="./images/saint-p.jpg" alt="СПб">
-                    <div class="titlefield">
-                        <h3 class="titlefield__title">Санкт-Петербург</h3>
-                        <a class="titlefield__image" href="#"></a>
-                    </div>
-                </li>
-                <li class="elements-grid__item">
-                    <img class="elements-grid__image" src="./images/slovenia.jpg" alt="Словения">
-                    <div class="titlefield">
-                        <h3 class="titlefield__title">Словения</h3>
-                        <a class="titlefield__image" href="#"></a>
-                    </div>
-                </li>
-            </ul>
-        </section>
-    </main>
-    <footer class="footer">
-        <p class="footer__content">© 2020 Mesto Russia</p>
-    </footer>
+    <section class="profile">
+      <div class="profile__container">
+        <img class="profile__avatar" src="./images/kusto.jpg" alt="аватар">
+        <form class="profile__info">
+          <div class="form__container">
+            <p class="form__name" id="form__name">Жак-Ив Кусто</p>
+            <a class="form__button" href="#"></a>
+          </div>
+          <p class="form__profession" id="form__profession">Исследователь океана</p>
+        </form>
+      </div>
+      <button type="button" class="profile__button"></button>
+    </section>
+    <section class="elements">
+      <ul class="elements-grid">
+        <li class="elements-grid__item">
+          <img class="elements-grid__image" src="./images/cyprus.jpg" alt="Кипр">
+          <div class="titlefield">
+            <h3 class="titlefield__title">Кипр</h3>
+            <a class="titlefield__image" href="#"></a>
+          </div>
+        </li>
+        <li class="elements-grid__item">
+          <img class="elements-grid__image" src="./images/georgia.jpg" alt="грузия">
+          <div class="titlefield">
+            <h3 class="titlefield__title">Грузия</h3>
+            <a class="titlefield__image" href="#"></a>
+          </div>
+        </li>
+        <li class="elements-grid__item">
+          <img class="elements-grid__image" src="./images/paris.jpg">
+          <div class="titlefield">
+            <h3 class="titlefield__title">Париж</h3>
+            <a class="titlefield__image" href="#"></a>
+          </div>
+        </li>
+        <li class="elements-grid__item">
+          <img class="elements-grid__image" src="./images/hamburg-docks.jpg" alt="гамбург">
+          <div class="titlefield">
+            <h3 class="titlefield__title">Гамбург</h3>
+            <a class="titlefield__image" href="#"></a>
+          </div>
+        </li>
+        <li class="elements-grid__item">
+          <img class="elements-grid__image" src="./images/saint-p.jpg" alt="СПб">
+          <div class="titlefield">
+            <h3 class="titlefield__title">Санкт-Петербург</h3>
+            <a class="titlefield__image" href="#"></a>
+          </div>
+        </li>
+        <li class="elements-grid__item">
+          <img class="elements-grid__image" src="./images/slovenia.jpg" alt="Словения">
+          <div class="titlefield">
+            <h3 class="titlefield__title">Словения</h3>
+            <a class="titlefield__image" href="#"></a>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__content">© 2020 Mesto Russia</p>
+  </footer>
+  <script src="script.js"></script>
 </body>
 
 </html>

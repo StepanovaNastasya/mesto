@@ -9,14 +9,14 @@
 }
   
 @media screen and (min-width: 450px) and (max-width: 1024px)  {
-    .popup__title {
-        width: 80%;
-    }
+  .popup__title {
+    width: 80%;
+  }
 }
 
 @media  screen and (max-width: 449px) {
-    .popup__title {
-      font-size: 18px;
-      margin: 25px 22px 75px;
-    }
+  .popup__title {
+    font-size: 18px;
+    margin: 25px 22px 75px;
+  }
 } 

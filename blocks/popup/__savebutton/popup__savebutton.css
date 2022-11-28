@@ -14,23 +14,22 @@
 }
 
 .popup__savebutton:hover {
-    opacity: 0.8;
-    transition: 0.5s;
-    cursor: pointer;
+  opacity: 0.8;
+  transition: 0.5s;
+  cursor: pointer;
 }
 
 @media  screen and (min-width: 450px) and (max-width: 1024px)  {
-    .popup__savebutton {
-        width: 80%;
-    }
-    
+  .popup__savebutton {
+    width: 80%;
+  }    
 }
 
 @media  screen and (max-width: 449px)  {
-    .popup__savebutton {
-      max-width: 238px;
-      min-height: 46px;
-      font-size: 14px;
-      margin: 0 22px 25px;
-    }
+  .popup__savebutton {
+    max-width: 238px;
+    min-height: 46px;
+    font-size: 14px;
+    margin: 0 22px 25px;
+  }
 }

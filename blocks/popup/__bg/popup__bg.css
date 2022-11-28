@@ -1,4 +1,8 @@
 .popup__bg {
+  display: none;
+}
+
+.popup__bg.active {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -13,7 +17,7 @@
   align-items: center;
 }
 
-.popup__bg::before {
+.popup__bg.active::before {
   content: "";
   position: absolute;
   left: 0;

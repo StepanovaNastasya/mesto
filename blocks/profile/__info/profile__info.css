@@ -1,12 +1,12 @@
 .profile__info {
-    min-width: 336px;
+  min-width: 336px;
 }
 
 @media  screen and (max-width: 770px) {
-    .profile__info{
-      display: flex;
-      flex-direction: column;
-      align-content: center;
-      min-width: 282px;
-    }
-  }  
+  .profile__info{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    min-width: 282px;
+  }
+}  

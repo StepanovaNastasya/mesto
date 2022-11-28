@@ -1,10 +1,14 @@
 .titlefield__image {
-    background-image: url("../../../images/heart.svg");
-    width: 22px;
-    height:19px;
+  background-image: url("../../../images/heart.svg");
+  width: 22px;
+  height:19px;
 }
 
 .titlefield__image:hover {
-    opacity: 0.5;
-    transition: 0.5s;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+.titlefield__image.selected {
+  background-image: url("../../../images/active-heart.svg");
 }
