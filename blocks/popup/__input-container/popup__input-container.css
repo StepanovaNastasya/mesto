@@ -9,3 +9,9 @@
     line-height: 1.2;
     color: #000000;   
 }
+
+@media  screen and (max-width: 449px) {
+    .popup__input-container {
+        margin: 0 22px 45px;
+    }
+}

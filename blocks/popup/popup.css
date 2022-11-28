@@ -6,3 +6,10 @@
     max-width: 430px;
     min-height: 330px;
 }
+
+@media  screen and (min-width: 450px) and (max-width: 1024px)  {
+    .popup {
+        width: 90%;
+    }
+    
+}
