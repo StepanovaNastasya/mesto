@@ -1,0 +1,11 @@
+.popup__close {
+    align-self: flex-end;
+    color: #FFFFFF;
+    z-index: 1;
+}
+
+.popup__close:hover {
+    opacity: 0.6;
+    transition: 0.5s;
+    cursor: pointer;
+}

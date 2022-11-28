@@ -9,19 +9,32 @@
 </head>
 
 <body class="page">
-    <header class="header">
-        <img class="logo" src="./images/Logo.svg" alt="логотип">
-    </header>
-    <main>
+    <div class="popup__bg">
+        <div class="popup__container">
+        <img class="popup__close" src="./images/Close Icon.png" alt="закрыть">
+         <form class="popup">
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <fieldset class="popup__input-container">
+            <input type="text" placeholder="Имя" class="popup__name">
+            <input type="text" placeholder="Профессия" class="popup__profession">
+          </fieldset>
+          <button type="submit" class="popup__savebutton">Сохранить</button>
+         </form>
+        </div>
+    </div>    
+  <header class="header">
+    <img class="logo" src="./images/Logo.svg" alt="логотип">
+  </header>
+  <main>
         <section class="profile">
             <div class="profile__container">
                 <img class="profile__avatar" src="./images/kusto.jpg" alt="аватар">
                 <form class="profile__info">
-                        <div class="form__container">
-                            <p class="form__name">Жак-Ив Кусто</p>
-                            <a class="form__button" href="#"></a>
-                        </div>
-                        <p class="form__profession">Исследователь океана</p>
+                    <div class="form__container">
+                        <p class="form__name">Жак-Ив Кусто</p>
+                        <a class="form__button" href="#"></a>
+                    </div>
+                    <p class="form__profession">Исследователь океана</p>
                 </form>
             </div>
             <button type="submit" class="profile__button"></button>
@@ -69,12 +82,12 @@
                         <h3 class="titlefield__title">Словения</h3>
                         <a class="titlefield__image" href="#"></a>
                     </div>
-                </li>   
-            </ul>    
+                </li>
+            </ul>
         </section>
     </main>
     <footer class="footer">
-      <p class="footer__content">© 2020 Mesto Russia</p>
+        <p class="footer__content">© 2020 Mesto Russia</p>
     </footer>
 </body>
 

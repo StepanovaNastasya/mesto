@@ -8,20 +8,20 @@
   border-radius: 2px;
   min-width: 150px;
   min-height: 50px;
+  padding:0;
 }
 
-@media  screen and (max-width: 770px) {
-  .profile__button{
-    width: 70vw;
-    align-self: center;
-    margin: 36px auto 0;
-  }
-} 
+.profile__button:hover {
+  opacity: 0.6;
+  transition: 0.5s;
+  cursor: pointer;
+}
 
-@media  screen and (min-width: 357px) and (max-width: 769px) {
+@media  screen and (max-width: 769px) {
   .profile__button {
-    min-width: 282px;
+    width: 280px;
+    background-size: 16px;  
     align-self: center;
-    margin: 36px auto 0;
+    margin: 36px 19px 0 19px;
   }
 }
