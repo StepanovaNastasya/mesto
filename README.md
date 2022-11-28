@@ -1,5 +1,5 @@
 # Проект: Место
-https://stepanovanastasya.github.io/mesto/Index.html
+https://stepanovanastasya.github.io/mesto/index.html
 **о чем**
 Галерея фото с возможностью заполнять профиль
 
