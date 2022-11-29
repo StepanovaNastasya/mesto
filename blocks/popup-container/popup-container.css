@@ -1,4 +1,4 @@
-.popup__container {
+.popup-container {
   max-width: 470px;
   width: 100%;
   display: flex;
@@ -6,13 +6,13 @@
 }
 
 @media  screen and (min-width: 450px) and (max-width: 1024px)  {
-  .popup__container {
+  .popup-container {
     width: 80%;
   }
 }
 
 @media  screen and (max-width: 449px)  {
-  .popup__container {
+  .popup-container {
     max-width: 282px;
   }
 }

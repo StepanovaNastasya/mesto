@@ -1,11 +1,11 @@
 let openPopup = document.querySelector('.form__button');
-let popupBg = document.querySelector('.popup__bg');
-let closePopup = document.querySelector('.popup__close');
+let popupBg = document.querySelector('.popup-bg');
+let closePopup = document.querySelector('.popup-close');
 let popupName = document.querySelector('.popup__name');
 let popupProfession = document.querySelector('.popup__profession');
 let popupSave = document.querySelector('.popup__savebutton');
 let formName = document.getElementById('form__name');
-let formProfession = document.getElementById('form__profession');
+let formProfession = document.getElementById('form-profession');
 
 function open() {
     popupBg.classList.add('active');   
