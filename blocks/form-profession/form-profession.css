@@ -1,4 +1,4 @@
-.form__profession {
+.form-profession {
   margin: 16px 0 0;
   padding: 0;
   font-weight: 400;
@@ -7,13 +7,13 @@
 }
 
 @media screen and (max-width: 770px)  {
-    .form__profession {
+    .form-profession {
        margin: 14px auto 0;
     }
 } 
 
 @media  screen and (min-width: 357px) and (max-width: 769px){
-  .form__profession {
+  .form-profession {
     font-size: 16px;
     margin: 14px auto 0;
     text-align: center;
@@ -23,7 +23,7 @@
   }
 } 
 @media  screen and (max-width: 356px){
-  .form__profession {
+  .form-profession {
     font-size: 14px;
     margin: 14px auto 0;
     line-height: 1.21;
