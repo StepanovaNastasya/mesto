@@ -1,0 +1,31 @@
+.profile__openpopup {
+  background-image: url('../../../images/pensil.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000000;
+  border: 1px solid #FFFFFF;
+  width: 22px;
+  height: 22px;
+  align-self: center;
+  margin-left: 25px;
+  transition: 0.5s;
+}
+
+.profile__openpopup:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media  screen and (min-width: 357px) and (max-width: 769px){
+  .profile__openpopup{
+    margin-left: 15px;
+  }
+}
+
+@media  screen and (max-width: 356px)  {
+  .profile__openpopup {
+    margin-left: 10px;
+    width: 18px;
+    height: 18px;
+  }
+} 

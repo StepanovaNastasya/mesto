@@ -1,11 +1,5 @@
-.form{
-  display: flex;
-  justify-content: space-between;
+.form {
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
-
-@media screen and (max-width: 770px)  {
-  .form {
-    justify-content: center;
-    max-width: 320px;
-  }
-} 

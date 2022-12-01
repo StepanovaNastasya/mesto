@@ -15,8 +15,8 @@
 }
 
 @font-face {
-  src: url('../vendor/fonts/Inter-roman.ttf') format("ttf");
-  src: url('../vendor/fonts/Inter-roman.woff') format("woff");
+  src: url('../vendor/fonts/Inter-Medium.ttf') format("ttf");
+  src: url('../vendor/fonts/Inter-Medium.woff') format("woff");
   font-weight: 500;
   font-family: 'Inter';
   font-style: normal;
