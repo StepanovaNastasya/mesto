@@ -3,16 +3,17 @@
   justify-content: space-between;
 }
 
-@media screen and (min-width: 361px) and (max-width: 770px) {
+@media screen and (max-width: 770px) {
   .profile__content {
     margin-top: 25px;
+    justify-content: center;
   }
 }
 
-@media screen and (max-width: 360px)  {
+@media screen and (max-width: 355px)  {
   .profile__content {
-    max-width: 217px;
-    justify-content: center;
-    margin: 25px 38px 0 65px;
+    max-width: 261px;
+    margin-left: 19px;
+    justify-content: flex-end;
   }
-} 
+}

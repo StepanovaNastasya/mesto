@@ -4,6 +4,9 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 1.22;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 770px)  {
@@ -13,16 +16,18 @@
     }
 } 
 
-@media  screen and (min-width: 357px) and (max-width: 769px){
+@media  screen and (min-width: 400px) and (max-width: 769px){
   .profile__profession {
     font-size: 16px;
+    max-width: 280px;
   }
 }
 
-@media screen and (max-width: 356px){
+@media screen and (max-width: 399px){
   .profile__profession {
     font-size: 14px;
-    line-height: 0;
+    max-width: 280px;
+    line-height: 1;
   }
 }
   

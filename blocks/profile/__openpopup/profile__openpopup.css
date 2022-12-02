@@ -3,9 +3,10 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: #000000;
+  box-sizing: border-box;
   border: 1px solid #FFFFFF;
-  width: 22px;
-  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
   align-self: center;
   margin-left: 25px;
   transition: 0.5s;
@@ -25,7 +26,7 @@
 @media  screen and (max-width: 356px)  {
   .profile__openpopup {
     margin-left: 10px;
-    width: 18px;
-    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
   }
 } 
