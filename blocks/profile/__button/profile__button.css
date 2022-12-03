@@ -10,6 +10,7 @@
   min-height: 50px;
   padding:0;
   transition: 0.5s;
+  margin-left: 5px;
 }
 
 .profile__button:hover {
@@ -27,6 +28,6 @@
     width: 280px;
     background-size: 16px;
     align-self: center;
-    margin: 34px 19px 0 19px;
+    margin: 32px 19px 0 19px;
   }
 }

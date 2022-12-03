@@ -1,17 +1,26 @@
 .popup__container {
   max-width: 430px;
   min-height: 330px;
-  align-self: stretch;
   width: 100%;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
   z-index: 1;
   background-color: #FFFFFF;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-@media  screen and (min-width: 477px) and (max-width: 1024px)  {
+@media  screen and (min-width: 550px) and (max-width: 1024px)  {
   .popup__container {
     width: 90%;
+  }
+}
+
+@media  screen and (min-width: 477px) and (max-width: 549px){
+  .popup__container{
+    margin-top: 32px;
+    max-width: calc(100vw - 125px);
   }
 }
 

@@ -7,13 +7,19 @@
   padding: 0;
 }
   
-@media screen and (min-width: 480px) and (max-width: 1024px)  {
+@media screen and (min-width: 510px) and (max-width: 1024px)  {
   .popup__title {
     width: 80%;
   }
 }
 
-@media  screen and (max-width: 479px) {
+@media screen and (max-width: 451px) and (max-width: 509) {
+  .popup__title {
+    font-size: 20px;
+  }
+}
+
+@media  screen and (max-width: 450px) {
   .popup__title {
     font-size: 18px;
     margin: 25px 22px 75px;

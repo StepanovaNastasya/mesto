@@ -5,13 +5,15 @@
   background-size: 100%;
   background-color: rgba(0,0,0,0);
   padding: 0;
-  margin: 0 0 8px 8px;
+  margin: 0;
   color: #FFFFFF;
   min-width: 32px;
-  align-self: flex-end;
   min-height: 32px;
   border: none;
   z-index: 1;
+  position: absolute;
+  top: -40px;
+  left: 436px;
 }
 
 .popup__close:hover {
@@ -19,11 +21,25 @@
   transition: 0.5s;
   cursor: pointer;
 }
+@media  screen and (min-width: 477px) and (max-width: 549px){
+  .popup__close{
+    left:calc(100vw - 125px);
+    top: -40px;
+  }
+}
 
-@media  screen and (max-width: 449px) {
+@media  screen and (max-width: 476px) {
   .popup__close {
     min-width: 20px;
     min-height: 20px;
-    margin: 0 0 16px;
+    left: 282px;
+    top: -23px;
+  }
+}
+
+@media  screen and (max-width: 350px) {
+  .popup__close{
+    left: 262px;
+    top: -36px;
   }
 }
