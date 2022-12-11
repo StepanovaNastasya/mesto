@@ -28,79 +28,50 @@
     </section>
     <section class="elements">
       <ul class="elements-grid">
-        <li class="elements-grid__item">
-          <article class="elements-grid__article">
-          <img class="elements-grid__image" src="./images/cyprus.jpg" alt="Кипр">
-          <div class="elements-grid__titlefield">
-            <h2 class="elements-grid__title">Кипр</h2>
-            <button type="button" class="elements-grid__button"></button>
-          </div>
-        </article>
-        </li>
-        <li class="elements-grid__item">
-          <article class="elements-grid__article">
-          <img class="elements-grid__image" src="./images/georgia.jpg" alt="грузия">
-          <div class="elements-grid__titlefield">
-            <h2 class="elements-grid__title">Грузия</h2>
-            <button type="button" class="elements-grid__button"></button>
-          </div>
-        </article>
-        </li>
-        <li class="elements-grid__item">
-          <article class="elements-grid__article">
-          <img class="elements-grid__image" src="./images/paris.jpg" alt="париж">
-          <div class="elements-grid__titlefield">
-            <h2 class="elements-grid__title">Париж</h2>
-            <button type="button" class="elements-grid__button"></button>
-          </div>
-        </article>
-        </li>
-        <li class="elements-grid__item">
-          <article class="elements-grid__article">
-          <img class="elements-grid__image" src="./images/hamburg-docks.jpg" alt="гамбург">
-          <div class="elements-grid__titlefield">
-            <h2 class="elements-grid__title">Гамбург</h2>
-            <button type="button" class="elements-grid__button"></button>
-          </div>
-        </article>
-        </li>
-        <li class="elements-grid__item">
-          <article class="elements-grid__article">
-          <img class="elements-grid__image" src="./images/saint-p.jpg" alt="СПб">
-          <div class="elements-grid__titlefield">
-            <h2 class="elements-grid__title">Санкт-Петербург</h2>
-            <button type="button" class="elements-grid__button"></button>
-          </div>
-        </article>
-        </li>
-        <li class="elements-grid__item">
-          <article class="elements-grid__article">
-          <img class="elements-grid__image" src="./images/slovenia.jpg" alt="Словения">
-          <div class="elements-grid__titlefield">
-            <h2 class="elements-grid__title">Словения</h2>
-            <button type="button" class="elements-grid__button"></button>
-          </div>
-        </article>
-        </li>
+       
       </ul>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__content">© 2020 Mesto Russia</p>
   </footer>
-  <div class="popup">
+  <div class="popup" id="popup-profile">
     <div class="popup__container">      
-      <button type="button" class="popup__close"></button>
+      <button type="button" class="popup__close" id="popup__close-profile"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form name="form" class="form">
+            <form name="form-profile" class="form">
               <fieldset class="form__input-container">
                 <input type="text" name="name" placeholder="Имя" class="form__input form__input_value_name">
                 <input type="text" name="profession" placeholder="Профессия" class="form__input form__input_value_profession">
               </fieldset>
-              <button type="submit" class="form__savebutton">Сохранить</button>
+              <button type="submit" class="form__savebutton" id="form__savebutton-profile">Сохранить</button>
             </form>
     </div>
   </div>
+  <div class="popup" id="popup-mesto">
+    <div class="popup__container">      
+      <button type="button" class="popup__close" id="popup__close-mesto"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form name="form-mesto" class="form">
+              <fieldset class="form__input-container">
+                <input type="text" name="Название" placeholder="Название" class="form__input form__input_value_image-name">
+                <input type="text" name="Ссылка на картинку" placeholder="Ссылка на картинку" class="form__input form__input_value_link">
+              </fieldset>
+              <button type="submit" class="form__savebutton" id="form__savebutton-mesto">Создать</button>
+            </form>
+    </div>
+  </div>
+  <template id="elements-grid__item-template">
+    <li class="elements-grid__item">
+      <article class="elements-grid__article">
+      <img class="elements-grid__image">
+      <div class="elements-grid__titlefield">
+        <h2 class="elements-grid__title"></h2>
+        <button type="button" class="elements-grid__button"></button>
+      </div>
+    </article>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 
