@@ -28,7 +28,6 @@
     </section>
     <section class="elements">
       <ul class="elements-grid">
-       
       </ul>
     </section>
   </main>
@@ -39,7 +38,7 @@
     <div class="popup__container">      
       <button type="button" class="popup__close" id="popup__close-profile"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form name="form-profile" class="form">
+            <form name="form-profile" id="form-profile" class="form">
               <fieldset class="form__input-container">
                 <input type="text" name="name" placeholder="Имя" class="form__input form__input_value_name">
                 <input type="text" name="profession" placeholder="Профессия" class="form__input form__input_value_profession">
@@ -52,7 +51,7 @@
     <div class="popup__container">      
       <button type="button" class="popup__close" id="popup__close-mesto"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form name="form-mesto" class="form">
+            <form name="form-mesto" id="form-mesto" class="form">
               <fieldset class="form__input-container">
                 <input type="text" name="Название" placeholder="Название" class="form__input form__input_value_image-name">
                 <input type="text" name="Ссылка на картинку" placeholder="Ссылка на картинку" class="form__input form__input_value_link">
@@ -61,15 +60,23 @@
             </form>
     </div>
   </div>
+  <div class="popup-image" id="popup-image">
+    <div class="popup-image__container">
+      <button type="button" class="popup-image__close" id="popup__close-image"></button>
+      <img class="popup-image__image" src="./images/hamburg-docks.jpg">
+      <p class="popup-image__description">Грузия</p>
+    </div>    
+  </div>
   <template id="elements-grid__item-template">
     <li class="elements-grid__item">
       <article class="elements-grid__article">
-      <img class="elements-grid__image">
-      <div class="elements-grid__titlefield">
-        <h2 class="elements-grid__title"></h2>
-        <button type="button" class="elements-grid__button"></button>
-      </div>
-    </article>
+        <button type="button" class="elements-grid__trash"></button>
+        <img class="elements-grid__image">
+        <div class="elements-grid__titlefield">  
+          <h2 class="elements-grid__title"></h2>
+          <button type="button" class="elements-grid__button"></button>
+        </div>
+      </article>
     </li>
   </template>
   <script src="./scripts/index.js"></script>

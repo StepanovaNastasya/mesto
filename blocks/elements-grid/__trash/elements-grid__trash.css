@@ -1,0 +1,18 @@
+.elements-grid__trash {
+  color: #ffffff;
+  background-image: url("../../../images/trash.svg");
+  background-size: auto;
+  background-color: rgba(0,0,0,0);
+  position: absolute;
+  top: 20px;
+  left: 244px;
+  width: 18px;
+  height: 19px;
+  border: none;
+  transition: 0.5s;
+}
+
+.elements-grid__trash:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
