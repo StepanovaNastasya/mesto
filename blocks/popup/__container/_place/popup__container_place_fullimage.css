@@ -1,0 +1,9 @@
+.popup__container_place_fullimage {
+  position: relative;
+  max-width: 75vw;
+  max-height: 75vh;
+  width: auto;
+  border-radius: none;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0);
+}

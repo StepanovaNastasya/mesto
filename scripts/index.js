@@ -46,9 +46,9 @@ const addCardImageLinkInput = document.querySelector('.form__input_value_link');
 const addCardSaveForm = document.getElementById('form-mesto');
 
 const fullImagePopup = document.getElementById('popup-image');
-const fullImagePopupCloseButton = document.querySelector('.popup-image__close');
-const fullImagePopupImage = document.querySelector('.popup-image__image');
-const fullImagePopupName = document.querySelector('.popup-image__description');
+const fullImagePopupCloseButton = document.getElementById('popup__close-image');
+const fullImagePopupImage = document.querySelector('.popup__image');
+const fullImagePopupName = document.querySelector('.popup__description');
 
 function makeLike(evt) {
    let likeButton = evt.target;
@@ -63,13 +63,14 @@ function deleteCard(evt) {
 function openFullImagePopup(evt) {
     let targetImage = evt.target;
     fullImagePopupImage.src = targetImage.src;
+    fullImagePopupImage.alt = targetImage.alt;
     fullImagePopupName.textContent = targetImage.alt;
 
-    fullImagePopup.classList.add('popup-image_opened');
+    fullImagePopup.classList.add('popup_opened');
 }
 
 function closeFullImagePopup () {
-    fullImagePopup.classList.remove('popup-image_opened');
+    fullImagePopup.classList.remove('popup_opened');
 }
 
 function createCard(name, link) {

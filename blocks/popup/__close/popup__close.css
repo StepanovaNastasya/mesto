@@ -10,10 +10,10 @@
   min-width: 32px;
   min-height: 32px;
   border: none;
-  z-index: 1;
-  position: absolute;
+  position:absolute;
   top: -40px;
-  left: 436px;
+  right: -40px;
+  z-index: 1;
 }
 
 .popup__close:hover {
@@ -21,25 +21,12 @@
   transition: 0.5s;
   cursor: pointer;
 }
-@media  screen and (min-width: 477px) and (max-width: 549px){
-  .popup__close{
-    left:calc(100vw - 125px);
-    top: -40px;
-  }
-}
 
 @media  screen and (max-width: 476px) {
   .popup__close {
     min-width: 20px;
     min-height: 20px;
-    left: 282px;
-    top: -23px;
-  }
-}
-
-@media  screen and (max-width: 350px) {
-  .popup__close{
-    left: 262px;
+    right: 0;
     top: -36px;
   }
 }
