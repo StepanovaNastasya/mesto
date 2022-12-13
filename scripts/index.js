@@ -27,6 +27,7 @@ const initialCards = [
 
 const elementsTemplate = document.getElementById('elements-grid__item-template').content;
 const elementsContainer = document.querySelector('.elements-grid');
+
     
 const profileNameText = document.querySelector('.profile__name');
 const profileProfessionText = document.querySelector('.profile__profession');
@@ -84,14 +85,16 @@ function closeFullImagePopup () {
 
 function createCard(name, link) {
     const elementItem  = elementsTemplate.cloneNode(true);
+    const elementImage = elementItem.querySelector('.elements-grid__image');
+    
 
     elementItem.querySelector('.elements-grid__title').textContent = name;  
-    elementItem.querySelector('.elements-grid__image').src = link;
-    elementItem.querySelector('.elements-grid__image').alt = name; 
+    elementImage.src = link;
+    elementImage.alt = name; 
 
     elementItem.querySelector('.elements-grid__button').addEventListener('click', makeLike);
     elementItem.querySelector('.elements-grid__trash').addEventListener('click', deleteCard);
-    elementItem.querySelector('.elements-grid__image').addEventListener('click', openFullImagePopup);
+    elementImage.addEventListener('click', openFullImagePopup);
 
     return elementItem;
 }
