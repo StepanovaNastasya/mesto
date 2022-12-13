@@ -31,24 +31,21 @@ const elementsContainer = document.querySelector('.elements-grid');
     
 const profileNameText = document.querySelector('.profile__name');
 const profileProfessionText = document.querySelector('.profile__profession');
-const closeButton = document.querySelectorAll('.popup__close');
+const closeButtons = document.querySelectorAll('.popup__close');
 
 const editProfileButton = document.querySelector('.profile__openpopup');
 const editProfilePopup = document.getElementById('popup-profile');
-const editProfileCloseButton = document.getElementById('popup__close-profile');
 const editProfileNameInput = document.querySelector('.form__input_value_name');
 const editProfileProfessionInput = document.querySelector('.form__input_value_profession');
-const editProfileSaveForm = document.getElementById('form-profile');
+const editProfileSaveForm = document.forms['form-profile'];
 
 const addCardButton = document.querySelector('.profile__button')
 const addCardPopup = document.getElementById('popup-mesto');
-const addCardCloseButton = document.getElementById('popup__close-mesto');
 const addCardImageNameInput = document.querySelector('.form__input_value_image-name');
 const addCardImageLinkInput = document.querySelector('.form__input_value_link');
-const addCardSaveForm = document.getElementById('form-mesto');
+const addCardSaveForm = document.forms ['form-mesto'];
 
 const fullImagePopup = document.getElementById('popup-image');
-const fullImagePopupCloseButton = document.getElementById('popup__close-image');
 const fullImagePopupImage = document.querySelector('.popup__image');
 const fullImagePopupName = document.querySelector('.popup__description');
 
@@ -61,26 +58,23 @@ function closePopup(popup) {
 }
 
 function makeLike(evt) {
-   let likeButton = evt.target;
+   const likeButton = evt.target;
+
    likeButton.classList.toggle("selected");
 } 
 
 function deleteCard(evt) {
-    let trashButton = evt.target;
-    trashButton.parentElement.parentElement.remove();
+    evt.target.closest('.elements-grid__item').remove();
 }
 
 function openFullImagePopup(evt) {
-    let targetImage = evt.target;
+    const targetImage = evt.target;
+
     fullImagePopupImage.src = targetImage.src;
     fullImagePopupImage.alt = targetImage.alt;
     fullImagePopupName.textContent = targetImage.alt;
 
     openPopup(fullImagePopup);
-}
-
-function closeFullImagePopup () {
-  closePopup(fullImagePopup);
 }
 
 function createCard(name, link) {
@@ -105,6 +99,16 @@ function init() {
     elementsContainer.append(elementItem);
   });
 }
+
+function addListenersToClosePopupButtons() {
+  closeButtons.forEach(function(closeButton) {
+    const popup = closeButton.closest('.popup');
+
+    closeButton.addEventListener('click', function() {
+      closePopup(popup);
+    });
+  });
+}
   
 function openEditPopup() {
     openPopup(editProfilePopup);  
@@ -123,7 +127,7 @@ function changeProfile(evt) {
     profileNameText.textContent = editProfileNameInput.value;
     profileProfessionText.textContent = editProfileProfessionInput.value;
 
-    closeEditPopup();
+    closePopup(editProfilePopup);
 }
 
 function addCard(evt) {
@@ -133,16 +137,8 @@ function addCard(evt) {
     const imageLinkValue = addCardImageLinkInput.value;
 
     const card = createCard(imageNameValue, imageLinkValue);
-    elementsContainer.insertBefore(card, elementsContainer.firstChild);
+    elementsContainer.prepend(card);
 
-    closeAddCardPopup();
-}
-
-function closeEditPopup () {
-  closePopup(editProfilePopup);
-}
-
-function closeAddCardPopup () {
     closePopup(addCardPopup);
 
     addCardImageNameInput.value = '';
@@ -150,13 +146,10 @@ function closeAddCardPopup () {
 }
 
 init();
+addListenersToClosePopupButtons();
 
 editProfileButton.addEventListener('click', openEditPopup);
-editProfileCloseButton.addEventListener('click', closeEditPopup);
 editProfileSaveForm.addEventListener('submit', changeProfile);
 
 addCardButton.addEventListener('click', openAddCardPopup);
-addCardCloseButton.addEventListener('click', closeAddCardPopup);
 addCardSaveForm.addEventListener('submit', addCard);
-
-fullImagePopupCloseButton.addEventListener('click', closeFullImagePopup);
