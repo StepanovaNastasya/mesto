@@ -30,6 +30,7 @@ const elementsContainer = document.querySelector('.elements-grid');
     
 const profileNameText = document.querySelector('.profile__name');
 const profileProfessionText = document.querySelector('.profile__profession');
+const closeButton = document.querySelectorAll('.popup__close');
 
 const editProfileButton = document.querySelector('.profile__openpopup');
 const editProfilePopup = document.getElementById('popup-profile');
@@ -50,6 +51,14 @@ const fullImagePopupCloseButton = document.getElementById('popup__close-image');
 const fullImagePopupImage = document.querySelector('.popup__image');
 const fullImagePopupName = document.querySelector('.popup__description');
 
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
+
 function makeLike(evt) {
    let likeButton = evt.target;
    likeButton.classList.toggle("selected");
@@ -66,11 +75,11 @@ function openFullImagePopup(evt) {
     fullImagePopupImage.alt = targetImage.alt;
     fullImagePopupName.textContent = targetImage.alt;
 
-    fullImagePopup.classList.add('popup_opened');
+    openPopup(fullImagePopup);
 }
 
 function closeFullImagePopup () {
-    fullImagePopup.classList.remove('popup_opened');
+  closePopup(fullImagePopup);
 }
 
 function createCard(name, link) {
@@ -95,14 +104,14 @@ function init() {
 }
   
 function openEditPopup() {
-    editProfilePopup.classList.add('popup_opened');   
+    openPopup(editProfilePopup);  
 
     editProfileNameInput.value = profileNameText.textContent;
     editProfileProfessionInput.value = profileProfessionText.textContent;
 }
 
 function openAddCardPopup() {
-    addCardPopup.classList.add('popup_opened');
+  openPopup(addCardPopup);
 }     
 
 
@@ -127,11 +136,11 @@ function addCard(evt) {
 }
 
 function closeEditPopup () {
-    editProfilePopup.classList.remove('popup_opened'); 
+  closePopup(editProfilePopup);
 }
 
 function closeAddCardPopup () {
-    addCardPopup.classList.remove('popup_opened'); 
+    closePopup(addCardPopup);
 
     addCardImageNameInput.value = '';
     addCardImageLinkInput.value = '';
