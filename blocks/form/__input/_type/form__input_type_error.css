@@ -1,0 +1,7 @@
+.form__input_type_error {
+  
+}
+
+.form__input_type_error:first-of-type {
+  margin-bottom: 0;
+}

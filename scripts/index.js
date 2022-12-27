@@ -32,6 +32,7 @@ const elementsContainer = document.querySelector('.elements-grid');
 const profileNameText = document.querySelector('.profile__name');
 const profileProfessionText = document.querySelector('.profile__profession');
 const closeButtons = document.querySelectorAll('.popup__close');
+const popupWindows = document.querySelectorAll('.popup');
 
 const editProfileButton = document.querySelector('.profile__openpopup');
 const editProfilePopup = document.getElementById('popup-profile');
@@ -75,6 +76,7 @@ function openFullImagePopup(evt) {
     fullImagePopupName.textContent = targetImage.alt;
 
     openPopup(fullImagePopup);
+    window.addEventListener('click', closeModal);
 }
 
 function createCard(name, link) {
@@ -109,16 +111,27 @@ function addListenersToClosePopupButtons() {
     });
   });
 }
+
+function closeModal(event) {
+  const target = event.target;
+  if (target === editProfilePopup || target === addCardPopup) {
+    popupWindows.forEach(function(closeModalwindow) {
+      closePopup(closeModalwindow);
+    });
+  }
+}
   
 function openEditPopup() {
     openPopup(editProfilePopup);  
 
     editProfileNameInput.value = profileNameText.textContent;
     editProfileProfessionInput.value = profileProfessionText.textContent;
+    window.addEventListener('click', closeModal);
 }
 
 function openAddCardPopup() {
   openPopup(addCardPopup);
+  window.addEventListener('click', closeModal);
 }     
 
 
