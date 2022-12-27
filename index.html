@@ -40,9 +40,9 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <form name="form-profile" id="form-profile" class="form">
               <fieldset class="form__input-container">
-                <input type="text" name="name" placeholder="Имя" class="form__input form__input_value_name " required minlength="2" maxlength="40">
+                <input type="text" name="name" id="form-name-input" placeholder="Имя" class="form__input form__input_value_name " required minlength="2" maxlength="40">
                 <span class="form__input-error" id="form-name-input-error"></span>
-                <input type="text" name="profession"  placeholder="О себе" class="form__input form__input_value_profession " required minlength="2" maxlength="200">
+                <input type="text" name="profession" id="form-profession-input" placeholder="О себе" class="form__input form__input_value_profession " required minlength="2" maxlength="200">
                 <span class="form__input-error " id="form-profession-input-error"></span>
               </fieldset>
               <button type="submit" class="form__savebutton " id="form__savebutton-profile">Сохранить</button>
@@ -55,9 +55,9 @@
             <h2 class="popup__title">Новое место</h2>
             <form name="form-mesto" id="form-mesto" class="form">
               <fieldset class="form__input-container form__input-container-error">
-                <input type="text" name="Название" placeholder="Название" class="form__input form__input_value_image-name form__input_type_error" required minlength="2" maxlength="30">
+                <input type="text" name="Название" placeholder="Название" id="form-name-image" class="form__input form__input_value_image-name form__input_type_error" required minlength="2" maxlength="30">
                 <span class="form__input-error form__input-error_visible" id="form-name-image-error"></span>
-                <input type="url" name="Ссылка на картинку" placeholder="Ссылка на картинку" class="form__input form__input_value_link form__input_type_error" required>
+                <input type="url" name="Ссылка на картинку" placeholder="Ссылка на картинку" id="form-mesto-link" class="form__input form__input_value_link form__input_type_error" required>
                 <span class="form__input-error form__input-error_visible" id="form-mesto-link-error"></span>
               </fieldset>
               <button type="submit" class="form__savebutton form__savebutton_inactive" id="form__savebutton-mesto">Создать</button>

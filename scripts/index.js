@@ -114,7 +114,9 @@ function addListenersToClosePopupButtons() {
 
 function closeModal(event) {
   const target = event.target;
-  if (target === editProfilePopup || target === addCardPopup) {
+  const code = event.code;
+
+  if (code === "Escape" || target === editProfilePopup || target === addCardPopup) {
     popupWindows.forEach(function(closeModalwindow) {
       closePopup(closeModalwindow);
     });
@@ -126,12 +128,10 @@ function openEditPopup() {
 
     editProfileNameInput.value = profileNameText.textContent;
     editProfileProfessionInput.value = profileProfessionText.textContent;
-    window.addEventListener('click', closeModal);
 }
 
 function openAddCardPopup() {
   openPopup(addCardPopup);
-  window.addEventListener('click', closeModal);
 }     
 
 
@@ -166,3 +166,6 @@ editProfileSaveForm.addEventListener('submit', changeProfile);
 
 addCardButton.addEventListener('click', openAddCardPopup);
 addCardSaveForm.addEventListener('submit', addCard);
+
+window.addEventListener('click', closeModal);
+window.addEventListener('keydown', closeModal);
