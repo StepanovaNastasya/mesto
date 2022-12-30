@@ -1,94 +1,63 @@
-const formProfile = document.forms['form-profile'];
-const formMesto = document.forms['form-mesto'];
-const formMestoInputs = formMesto.querySelectorAll('.form__input');
-const formProfileInputs = formProfile.querySelectorAll('.form__input');
 
-
-const inputFormProfileName = formProfile.querySelector('.form__input_value_name');
-const inputFormProfileProfession = formProfile.querySelector('.form__input_value_profession');
-const submitFormProfileButton = formProfile.querySelector('.form__savebutton');
-
-const inputFormMestoName = formMesto.querySelector('.form__input_value_image-name');
-const inputFormMestoLink = formMesto.querySelector('.form__input_value_link');
-const submitFormMestoButton = formMesto.querySelector('.form__savebutton');
-
-const inputFormProfileNameError = document.getElementById('form-name-input-error');
-const inputFormProfileProfessionError = document.getElementById('form-profession-input-error');
-const inputFormMestoNameError = document.getElementById('form-name-image-error');
-const inputFormMestoLinkError = document.getElementById('form-mesto-link-error');
-
-
-function showError(input, spanError, errorMessage) {
-  input.classList.add('form__input_type_error');
+function showError(input, spanError, inputErrorClass, spanErrorClass, errorMessage) {
+  input.classList.add(inputErrorClass);
   spanError.textContent = errorMessage;
-  spanError.classList.add('form__input-error_visible'); 
+  spanError.classList.add(spanErrorClass); 
 };
 
-function hideError(input, spanError) {
-  input.classList.remove('form__input_type_error');
-  spanError.classList.remove('form__input-error_visible'); 
+function hideError(input, spanError, inputErrorClass, spanErrorClass) {
+  input.classList.remove(inputErrorClass);
+  spanError.classList.remove(spanErrorClass); 
   spanError.textContent = ''; 
 };
 
-function checkInputValidityProfile(input, spanError)  {
+function checkButton(inputs, button, buttonErrorClass) {
+  const disableButton = Array.from(inputs).some(function(input) {
+    if (!input.validity.valid) {
+      return true;
+    } 
+    else {
+      return false;
+    }
+  });
+
+  if (disableButton) {
+    button.classList.add(buttonErrorClass);
+  }
+  else {
+    button.classList.remove(buttonErrorClass);
+  }
+}
+
+function checkInputValidity(inputs, button, input, spanError, inputErrorClass, spanErrorClass, buttonErrorClass)  {
   if (!input.validity.valid) {
-    showError(input, spanError, input.validationMessage);
+    showError(input, spanError, inputErrorClass, spanErrorClass, input.validationMessage);
   } 
   else {
-    hideError(input, spanError);
+    hideError(input, spanError, inputErrorClass, spanErrorClass);
   }
-  checkbuttonProfile();
+  checkButton(inputs, button, buttonErrorClass);
 };
 
-function checkbuttonProfile() {
-   if ((!inputFormProfileName.validity.valid) || (!inputFormProfileProfession.validity.valid)) {
-    submitFormProfileButton.classList.add('form__savebutton_inactive');
-   }
-   else {
-  submitFormProfileButton.classList.remove('form__savebutton_inactive');
-}
-}
+function enableValidation(description){
+  document.querySelectorAll(description.formSelector).forEach(function(form) {
+    const inputs = form.querySelectorAll(description.inputSelector);
+    const button = form.querySelector(description.submitButtonSelector);
 
-///////////////////////
-
-
-function checkInputValidityMesto (input, spanError)  {
-  if (!input.validity.valid) {
-    showError(input, spanError, input.validationMessage);
-  } 
-  else {
-    hideError(input, spanError);
-  }
-  checkbuttonMesto();
-};
-
-
-function checkbuttonMesto() {
-  if ((!inputFormMestoLink.validity.valid) || (!inputFormMestoName.validity.valid)) {
-    submitFormMestoButton.classList.add('form__savebutton_inactive');
-  }
-  else {
-    submitFormMestoButton.classList.remove('form__savebutton_inactive');
-}
-}
-
-
-
-
-formProfile.addEventListener('submit', function (evt) {
-  evt.preventDefault();
-});
-
-formProfileInputs.forEach(function(input) {
-  const spanError = document.getElementById(`${input.id}-error`);
-  input.addEventListener('input', function () {
-    checkInputValidityProfile(input, spanError);
+    inputs.forEach(function(input) {
+      const spanError = document.getElementById(`${input.id}-error`);
+      input.addEventListener('input', function () {
+        checkInputValidity(inputs, button, input, spanError, description.inputErrorClass, description.errorClass, description.inactiveButtonClass);
+      });
+    });
   });
-});
+}
 
-formMestoInputs.forEach(function(input) {
-  const spanError = document.getElementById(`${input.id}-error`);
-  input.addEventListener('input', function () {
-    checkInputValidityMesto(input, spanError);
-  });
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__savebutton',
+  inactiveButtonClass: 'form__savebutton_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_visible'
 });
