@@ -11,21 +11,26 @@ function hideError(input, spanError, inputErrorClass, spanErrorClass) {
   spanError.textContent = ''; 
 };
 
+function disableButton(button, buttonErrorClass) {
+  button.classList.add(buttonErrorClass);
+  button.disabled = true;
+}
+
+function enableButton(button, buttonErrorClass) {
+  button.classList.remove(buttonErrorClass);
+  button.disabled = false;
+}
+
 function checkButton(inputs, button, buttonErrorClass) {
-  const disableButton = Array.from(inputs).some(function(input) {
-    if (!input.validity.valid) {
-      return true;
-    } 
-    else {
-      return false;
-    }
+  const formHasAnyInvalidInput = Array.from(inputs).some(function(input) {
+    return !input.validity.valid;
   });
 
-  if (disableButton) {
-    button.classList.add(buttonErrorClass);
+  if (formHasAnyInvalidInput) {
+    disableButton(button, buttonErrorClass);
   }
   else {
-    button.classList.remove(buttonErrorClass);
+    enableButton(button, buttonErrorClass);
   }
 }
 
@@ -39,25 +44,18 @@ function checkInputValidity(inputs, button, input, spanError, inputErrorClass, s
   checkButton(inputs, button, buttonErrorClass);
 };
 
-function enableValidation(description){
-  document.querySelectorAll(description.formSelector).forEach(function(form) {
-    const inputs = form.querySelectorAll(description.inputSelector);
-    const button = form.querySelector(description.submitButtonSelector);
+function enableValidation(config){
+  document.querySelectorAll(config.formSelector).forEach(function(form) {
+    const inputs = form.querySelectorAll(config.inputSelector);
+    const button = form.querySelector(config.submitButtonSelector);
 
     inputs.forEach(function(input) {
-      const spanError = document.getElementById(`${input.id}-error`);
+      const spanError = document.querySelector(`#${input.id}-error`);
       input.addEventListener('input', function () {
-        checkInputValidity(inputs, button, input, spanError, description.inputErrorClass, description.errorClass, description.inactiveButtonClass);
+        checkInputValidity(inputs, button, input, spanError, config.inputErrorClass, config.errorClass, config.inactiveButtonClass);
       });
     });
   });
 }
 
-enableValidation({
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__savebutton',
-  inactiveButtonClass: 'form__savebutton_inactive',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_visible'
-});
+enableValidation(validationConfig);

@@ -1,31 +1,4 @@
-const initialCards = [
-  {
-    name: 'Кипр',
-    link: './images/cyprus.jpg'
-  },
-  {
-    name: 'Грузия',
-    link: './images/georgia.jpg'
-  },
-  {
-    name: 'Париж',
-    link: './images/paris.jpg'
-  },
-  {
-    name: 'Гамбург',
-    link: './images/hamburg-docks.jpg'
-  },
-  {
-    name: 'Санкт-Петербург',
-    link: './images/saint-p.jpg'
-  },
-  {
-    name: 'Словения',
-    link: './images/slovenia.jpg'
-  }
-];
-
-const elementsTemplate = document.getElementById('elements-grid__item-template').content;
+const elementsTemplate = document.querySelector('#elements-grid__item-template').content;
 const elementsContainer = document.querySelector('.elements-grid');
 
     
@@ -35,27 +8,45 @@ const closeButtons = document.querySelectorAll('.popup__close');
 const popupWindows = document.querySelectorAll('.popup');
 
 const editProfileButton = document.querySelector('.profile__openpopup');
-const editProfilePopup = document.getElementById('popup-profile');
+const editProfilePopup = document.querySelector('#popup-profile');
 const editProfileNameInput = document.querySelector('.form__input_value_name');
 const editProfileProfessionInput = document.querySelector('.form__input_value_profession');
 const editProfileSaveForm = document.forms['form-profile'];
 
 const addCardButton = document.querySelector('.profile__button')
-const addCardPopup = document.getElementById('popup-mesto');
+const addCardPopup = document.querySelector('#popup-mesto');
 const addCardImageNameInput = document.querySelector('.form__input_value_image-name');
 const addCardImageLinkInput = document.querySelector('.form__input_value_link');
+const addCardSaveButton = document.querySelector('#form__savebutton-mesto');
 const addCardSaveForm = document.forms ['form-mesto'];
 
-const fullImagePopup = document.getElementById('popup-image');
+const fullImagePopup = document.querySelector('#popup-image');
 const fullImagePopupImage = document.querySelector('.popup__image');
 const fullImagePopupName = document.querySelector('.popup__description');
 
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-}
-
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  
+  window.removeEventListener('keydown', closeModalByEsc);
+}
+
+function closeVisiblePopup() {
+  const visiblePopup = Array.from(popupWindows).find(function(popupWindow) {
+    return popupWindow.classList.contains('popup_opened');
+  });
+  closePopup(visiblePopup);
+}
+
+function closeModalByEsc(event) {
+  if (event.code === "Escape") {
+    closeVisiblePopup();
+  }
+}
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  
+  window.addEventListener('keydown', closeModalByEsc);
 }
 
 function makeLike(evt) {
@@ -76,7 +67,6 @@ function openFullImagePopup(evt) {
     fullImagePopupName.textContent = targetImage.alt;
 
     openPopup(fullImagePopup);
-    window.addEventListener('click', closeModal);
 }
 
 function createCard(name, link) {
@@ -95,7 +85,7 @@ function createCard(name, link) {
     return elementItem;
 }
 
-function init() {
+function renderInitialCards() {
   initialCards.forEach(function (item) {
     const elementItem = createCard(item.name, item.link);
     elementsContainer.append(elementItem);
@@ -112,14 +102,10 @@ function addListenersToClosePopupButtons() {
   });
 }
 
-function closeModal(event) {
+function closeModalByClickOutside(event) {
   const target = event.target;
-  const code = event.code;
-
-  if (code === "Escape" || target === editProfilePopup || target === addCardPopup) {
-    popupWindows.forEach(function(closeModalwindow) {
-      closePopup(closeModalwindow);
-    });
+  if (target.classList.contains('popup')) {
+    closeVisiblePopup();
   }
 }
   
@@ -154,11 +140,11 @@ function addCard(evt) {
 
     closePopup(addCardPopup);
 
-    addCardImageNameInput.value = '';
-    addCardImageLinkInput.value = '';
+    addCardSaveForm.reset();
+    addCardSaveButton.classList.add('form__savebutton_inactive');
 }
 
-init();
+renderInitialCards();
 addListenersToClosePopupButtons();
 
 editProfileButton.addEventListener('click', openEditPopup);
@@ -167,5 +153,4 @@ editProfileSaveForm.addEventListener('submit', changeProfile);
 addCardButton.addEventListener('click', openAddCardPopup);
 addCardSaveForm.addEventListener('submit', addCard);
 
-window.addEventListener('click', closeModal);
-window.addEventListener('keydown', closeModal);
+window.addEventListener('click', closeModalByClickOutside);
