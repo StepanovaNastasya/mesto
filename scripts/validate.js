@@ -1,3 +1,4 @@
+import {validationConfig} from './constants.js';
 
 function showError(input, spanError, inputErrorClass, spanErrorClass, errorMessage) {
   input.classList.add(inputErrorClass);

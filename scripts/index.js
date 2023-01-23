@@ -1,4 +1,8 @@
-const elementsTemplate = document.querySelector('#elements-grid__item-template').content;
+import {initialCards, validationConfig} from './constants.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
+
 const elementsContainer = document.querySelector('.elements-grid');
 
     
@@ -11,6 +15,8 @@ const editProfileButton = document.querySelector('.profile__openpopup');
 const editProfilePopup = document.querySelector('#popup-profile');
 const editProfileNameInput = document.querySelector('.form__input_value_name');
 const editProfileProfessionInput = document.querySelector('.form__input_value_profession');
+const editProfileNameSpanError = document.querySelector(`#${editProfileNameInput.id}-error`);
+const editProfileProfessionSpanError = document.querySelector(`#${editProfileProfessionInput.id}-error`);
 const editProfileSaveForm = document.forms['form-profile'];
 
 const addCardButton = document.querySelector('.profile__button')
@@ -49,45 +55,18 @@ function openPopup(popup) {
   window.addEventListener('keydown', closeModalByEsc);
 }
 
-function makeLike(evt) {
-   const likeButton = evt.target;
-
-   likeButton.classList.toggle("selected");
-} 
-
-function deleteCard(evt) {
-    evt.target.closest('.elements-grid__item').remove();
-}
-
-function openFullImagePopup(evt) {
-    const targetImage = evt.target;
-
-    fullImagePopupImage.src = targetImage.src;
-    fullImagePopupImage.alt = targetImage.alt;
-    fullImagePopupName.textContent = targetImage.alt;
+function openFullImagePopup(name, link) {
+    fullImagePopupImage.src = link;
+    fullImagePopupImage.alt = name;
+    fullImagePopupName.textContent = name;
 
     openPopup(fullImagePopup);
 }
 
-function createCard(name, link) {
-    const elementItem  = elementsTemplate.cloneNode(true);
-    const elementImage = elementItem.querySelector('.elements-grid__image');
-    
-
-    elementItem.querySelector('.elements-grid__title').textContent = name;  
-    elementImage.src = link;
-    elementImage.alt = name; 
-
-    elementItem.querySelector('.elements-grid__button').addEventListener('click', makeLike);
-    elementItem.querySelector('.elements-grid__trash').addEventListener('click', deleteCard);
-    elementImage.addEventListener('click', openFullImagePopup);
-
-    return elementItem;
-}
-
 function renderInitialCards() {
   initialCards.forEach(function (item) {
-    const elementItem = createCard(item.name, item.link);
+    const card = new Card(item.name, item.link, '#elements-grid__item-template', openFullImagePopup);
+    const elementItem = card.render();
     elementsContainer.append(elementItem);
   });
 }
@@ -112,7 +91,16 @@ function closeModalByClickOutside(event) {
 function openEditPopup() {
     openPopup(editProfilePopup);  
 
+    editProfileNameSpanError.classList.remove(validationConfig.errorClass); 
+    editProfileNameSpanError.textContent = ''; 
+
+    editProfileProfessionSpanError.classList.remove(validationConfig.errorClass); 
+    editProfileProfessionSpanError.textContent = ''; 
+
+    editProfileNameInput.classList.remove(validationConfig.inputErrorClass);
     editProfileNameInput.value = profileNameText.textContent;
+
+    editProfileProfessionInput.classList.remove(validationConfig.inputErrorClass);
     editProfileProfessionInput.value = profileProfessionText.textContent;
 }
 
@@ -135,8 +123,10 @@ function addCard(evt) {
     const imageNameValue = addCardImageNameInput.value;
     const imageLinkValue = addCardImageLinkInput.value;
 
-    const card = createCard(imageNameValue, imageLinkValue);
-    elementsContainer.prepend(card);
+    const card = new Card(imageNameValue, imageLinkValue, '#elements-grid__item-template', openFullImagePopup);
+    const elementItem = card.render();
+    
+    elementsContainer.prepend(elementItem);
 
     closePopup(addCardPopup);
 
@@ -144,8 +134,16 @@ function addCard(evt) {
     addCardSaveButton.classList.add('form__savebutton_inactive');
 }
 
+function enableFormsValidation(config){
+  document.querySelectorAll(config.formSelector).forEach(function(form) {
+    const formValidator = new FormValidator(config, form);
+    formValidator.enableValidation();
+  });
+}
+
 renderInitialCards();
 addListenersToClosePopupButtons();
+enableFormsValidation(validationConfig);
 
 editProfileButton.addEventListener('click', openEditPopup);
 editProfileSaveForm.addEventListener('submit', changeProfile);
