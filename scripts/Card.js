@@ -2,33 +2,28 @@ export class Card {
   constructor(name, link, templateSelector, openFullImagePopupCallback) {
     this._name = name;
     this._link = link;
-    this._template = document.querySelector(templateSelector).content;
-    this._openFullImagePopupCallback = openFullImagePopupCallback;
+    this._element = document.querySelector(templateSelector).content.firstElementChild.cloneNode(true);
+    this._callbackOpenFullImagePopup = openFullImagePopupCallback;
   }
 
-  _getTemplate() {
-    const elementItem  = this._template.cloneNode(true);
-    const elementImage = elementItem.querySelector('.elements-grid__image');
+  _prepareTemplate() {
+    this._element.querySelector('.elements-grid__title').textContent = this._name;  
 
-    elementItem.querySelector('.elements-grid__title').textContent = this._name;  
+    const elementImage = this._element.querySelector('.elements-grid__image');
     elementImage.src = this._link;
-    elementImage.alt = this._name; 
-
-    return elementItem;
+    elementImage.alt = this._name;
   }
 
-  _addListeners(elementItem) {
-    elementItem.querySelector('.elements-grid__button').addEventListener('click', this._makeLike);
-    elementItem.querySelector('.elements-grid__trash').addEventListener('click', this._deleteCard);
-    elementItem.querySelector('.elements-grid__image').addEventListener('click', () => {
-      this._openFullImagePopup();
-    });
+  _addListeners() {
+    this._element.querySelector('.elements-grid__button').addEventListener('click', (evt) => this._makeLike(evt));
+    this._element.querySelector('.elements-grid__trash').addEventListener('click', () => this._deleteCard());
+    this._element.querySelector('.elements-grid__image').addEventListener('click', () => this._openFullImagePopup());
   }
   
   render() {
-    const elementItem = this._getTemplate();
-    this._addListeners(elementItem);
-    return elementItem;
+    this._prepareTemplate();
+    this._addListeners();
+    return this._element;
   }
 
   _makeLike(evt) {
@@ -37,11 +32,12 @@ export class Card {
     likeButton.classList.toggle("selected");
   } 
   
-  _deleteCard(evt) {
-    evt.target.closest('.elements-grid__item').remove();
+  _deleteCard() {
+    this._element.remove();
+    this._element = null;
   }
   
   _openFullImagePopup() {
-    this._openFullImagePopupCallback(this._name, this._link);
+    this._callbackOpenFullImagePopup(this._name, this._link);
   }
 }

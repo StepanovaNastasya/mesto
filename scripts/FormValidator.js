@@ -2,30 +2,30 @@ export class FormValidator {
   constructor(config, form) {
     this._inputs = form.querySelectorAll(config.inputSelector);
     this._button = form.querySelector(config.submitButtonSelector);
-    this._inputErrorClass = config.inputErrorClass;
-    this._errorClass = config.errorClass;
-    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._classErrorInput = config.inputErrorClass;
+    this._classErrorSpan = config.errorClass;
+    this._classInactiveButton = config.inactiveButtonClass;
   }
 
   _disableButton() {
-    this._button.classList.add(this._inactiveButtonClass);
+    this._button.classList.add(this._classInactiveButton);
     this._button.disabled = true;
   }
   
   _enableButton() {
-    this._button.classList.remove(this._inactiveButtonClass);
+    this._button.classList.remove(this._classInactiveButton);
     this._button.disabled = false;
   }
 
   _showError(input, spanError, errorMessage) {
-    input.classList.add(this._inputErrorClass);
+    input.classList.add(this._classErrorInput);
     spanError.textContent = errorMessage;
-    spanError.classList.add(this._errorClass); 
+    spanError.classList.add(this._classErrorSpan); 
   };
   
   _hideError(input, spanError) {
-    input.classList.remove(this._inputErrorClass);
-    spanError.classList.remove(this._errorClass); 
+    input.classList.remove(this._classErrorInput);
+    spanError.classList.remove(this._classErrorSpan); 
     spanError.textContent = ''; 
   };
 
