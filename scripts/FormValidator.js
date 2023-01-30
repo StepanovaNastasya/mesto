@@ -7,7 +7,7 @@ export class FormValidator {
     this._classInactiveButton = config.inactiveButtonClass;
   }
 
-  _disableButton() {
+  disableButton() {
     this._button.classList.add(this._classInactiveButton);
     this._button.disabled = true;
   }
@@ -35,7 +35,7 @@ export class FormValidator {
     });
   
     if (formHasAnyInvalidInput) {
-      this._disableButton();
+      this.disableButton();
     }
     else {
       this._enableButton();
@@ -58,6 +58,13 @@ export class FormValidator {
       input.addEventListener('input', () => {
         this._checkInputValidity(input, spanError);
       });
+    });
+  }
+
+  hideErrors() {
+    this._inputs.forEach((input) => {
+      const spanError = document.querySelector(`#${input.id}-error`);
+      this._hideError(input, spanError);
     });
   }
 }

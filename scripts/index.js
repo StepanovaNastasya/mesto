@@ -17,8 +17,6 @@ const buttonOpenEditProfile = document.querySelector('.profile__openpopup');
 const popupEditProfile = document.querySelector('#popup-profile');
 const inputEditProfileName = document.querySelector('.form__input_value_name');
 const inputEditProfileProfession = document.querySelector('.form__input_value_profession');
-const errorEditProfileName = document.querySelector(`#${inputEditProfileName.id}-error`);
-const errorEditProfileProfession = document.querySelector(`#${inputEditProfileProfession.id}-error`);
 const formEditProfile = document.forms['form-profile'];
 
 const buttonOpenAddCard = document.querySelector('.profile__button')
@@ -92,19 +90,12 @@ function closeModalByClickOutside(event) {
 }
   
 function openEditPopup() {
-    openPopup(popupEditProfile);  
+  validatorFormProfile.hideErrors();
+  
+  inputEditProfileName.value = profileName.textContent;
+  inputEditProfileProfession.value = profileProfession.textContent;
 
-    errorEditProfileName.classList.remove(validationConfig.errorClass); 
-    errorEditProfileName.textContent = ''; 
-
-    errorEditProfileProfession.classList.remove(validationConfig.errorClass); 
-    errorEditProfileProfession.textContent = ''; 
-
-    inputEditProfileName.classList.remove(validationConfig.inputErrorClass);
-    inputEditProfileName.value = profileName.textContent;
-
-    inputEditProfileProfession.classList.remove(validationConfig.inputErrorClass);
-    inputEditProfileProfession.value = profileProfession.textContent;
+  openPopup(popupEditProfile);  
 }
 
 function openAddCardPopup() {
@@ -131,7 +122,7 @@ function addCard(evt) {
     closePopup(popupAddCard);
 
     formAddCard.reset();
-    buttonAddCard.classList.add('form__savebutton_inactive');
+    validatorFormMesto.disableButton();
 }
 
 function enableFormsValidation(config){
