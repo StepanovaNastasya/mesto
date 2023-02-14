@@ -1,9 +1,9 @@
 export class Card {
-  constructor(name, link, templateSelector, openFullImagePopupCallback) {
+  constructor(name, link, templateSelector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._element = document.querySelector(templateSelector).content.firstElementChild.cloneNode(true);
-    this._callbackOpenFullImagePopup = openFullImagePopupCallback;
+    this._handleCardClick = handleCardClick;
   }
 
   _prepareTemplate() {
@@ -38,6 +38,6 @@ export class Card {
   }
   
   _openFullImagePopup() {
-    this._callbackOpenFullImagePopup(this._name, this._link);
+    this._handleCardClick(this._name, this._link);
   }
 }

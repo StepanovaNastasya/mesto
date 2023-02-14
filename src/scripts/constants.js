@@ -1,27 +1,34 @@
+import cyprus from '../images/cyprus.jpg';
+import georgia from '../images/georgia.jpg';
+import paris from '../images/paris.jpg';
+import saintp from '../images/saint-p.jpg';
+import hamburg from '../images/hamburg-docks.jpg';
+import slovenia from '../images/slovenia.jpg';
+
 const initialCards = [
   {
     name: 'Кипр',
-    link: './images/cyprus.jpg'
+    link: cyprus
   },
   {
     name: 'Грузия',
-    link: './images/georgia.jpg'
+    link: georgia
   },
   {
     name: 'Париж',
-    link: './images/paris.jpg'
+    link: paris
   },
   {
     name: 'Гамбург',
-    link: './images/hamburg-docks.jpg'
+    link: hamburg
   },
   {
     name: 'Санкт-Петербург',
-    link: './images/saint-p.jpg'
+    link: saintp
   },
   {
     name: 'Словения',
-    link: './images/slovenia.jpg'
+    link: slovenia
   }
 ];
 
