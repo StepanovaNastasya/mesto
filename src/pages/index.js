@@ -1,4 +1,4 @@
-import {initialCards, validationConfig} from '../components/constants.js';
+import {initialCards, validationConfig} from '../utils/constants.js';
 import {Card} from '../components/Card';
 import { Section } from '../components/Section.js';
 import {FormValidator} from '../components/FormValidator.js';
@@ -10,8 +10,6 @@ import './index.css';
 let validatorFormProfile;
 let validatorFormMesto;
 
-const elementsContainer = document.querySelector('.elements-grid');
-
 const buttonOpenEditProfile = document.querySelector('.profile__openpopup');
 const inputEditProfileName = document.querySelector('.form__input_value_name');
 const inputEditProfileProfession = document.querySelector('.form__input_value_profession');
@@ -20,9 +18,22 @@ const buttonOpenAddCard = document.querySelector('.profile__button')
 const inputAddCardName = document.querySelector('.form__input_value_image-name');
 const inputAddCardLink = document.querySelector('.form__input_value_link');
 
+const cardsSection = new Section({
+  'items': initialCards,
+  'renderer': function(card) {
+    return createCard(card.name, card.link);
+  }
+}, '.elements-grid');
+
 const popupEditProfile = new PopupWithForm('#popup-profile', changeProfile);
+popupEditProfile.setEventListeners();
+
 const popupAddCard = new PopupWithForm('#popup-mesto', addCard);
+popupAddCard.setEventListeners();
+
 const popupFullImage = new PopupWithImage('#popup-image');
+popupFullImage.setEventListeners();
+
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
 
 function createCard(name, link) {
@@ -31,13 +42,7 @@ function createCard(name, link) {
 }
 
 function renderInitialCards() {
-  const section = new Section({
-    'items': initialCards,
-    'renderer': function(card) {
-      return createCard(card.name, card.link);
-    }
-  }, '.elements-grid');
-  section.renderAll().forEach(element => section.addItem(element));
+  cardsSection.renderAll();
 }
   
 function openEditPopup() {
@@ -50,27 +55,19 @@ function openEditPopup() {
   popupEditProfile.open();
 }
 
-function changeProfile(evt) {
-    evt.preventDefault();
-
+function changeProfile({name, profession}) {
     userInfo.setUserInfo({
-      'name': inputEditProfileName.value,
-      'profession': inputEditProfileProfession.value
+      'name': name,
+      'profession': profession
     });
 
     popupEditProfile.close();
 }
 
-function addCard(evt) {
-    evt.preventDefault();
-
-    const valueImageName = inputAddCardName.value;
-    const valueImageLink = inputAddCardLink.value;
-
-    elementsContainer.prepend(createCard(valueImageName, valueImageLink));
+function addCard({'form-name-image': name, 'form-mesto-link': link}) {
+    cardsSection.prependItem(createCard(name, link));
 
     popupAddCard.close();
-    validatorFormMesto.disableButton();
 }
 
 function enableFormsValidation(config){
@@ -85,4 +82,7 @@ renderInitialCards();
 enableFormsValidation(validationConfig);
 
 buttonOpenEditProfile.addEventListener('click', openEditPopup);
-buttonOpenAddCard.addEventListener('click', popupAddCard.open.bind(popupAddCard));
+buttonOpenAddCard.addEventListener('click', () => {
+  validatorFormMesto.disableButton();
+  popupAddCard.open();
+});

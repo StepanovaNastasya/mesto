@@ -8,12 +8,16 @@ export class Section {
   }
 
   renderAll() {
-    return this.items.map(item => {
-      return this.renderer(item);
+    this.items.forEach(item => {
+      this.addItem(this.renderer(item));
     });
   }
 
   addItem(item) {
     this.container.append(item);
+  }
+
+  prependItem(item) {
+    this.container.prepend(item);
   }
 }
