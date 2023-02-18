@@ -1,11 +1,11 @@
-import {initialCards, validationConfig} from './scripts/constants.js';
-import {Card} from './scripts/Card';
-import { Section } from './scripts/Section.js';
-import {FormValidator} from './scripts/FormValidator.js';
-import {PopupWithImage} from './scripts/PopupWithImage.js';
-import {PopupWithForm} from './scripts/PopupWithForm.js';
-import {UserInfo} from './scripts/UserInfo.js';
-import './pages/index.css'; 
+import {initialCards, validationConfig} from '../components/constants.js';
+import {Card} from '../components/Card';
+import { Section } from '../components/Section.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {PopupWithImage} from '../components/PopupWithImage.js';
+import {PopupWithForm} from '../components/PopupWithForm.js';
+import {UserInfo} from '../components/UserInfo.js';
+import './index.css'; 
 
 let validatorFormProfile;
 let validatorFormMesto;
