@@ -78,7 +78,21 @@
       <button type="button" class="popup__close" id="popup__close-answer"></button>
       <h2 class="popup__title">Вы уверены?</h2>
       <form name="form-answer" id="form-answer" class="form">
-        <button type="submit" class="form__savebutton form_place_elements-grid-savebutton form__savebutton_inactive" id="form__savebutton-answer">Да</button>
+        <button type="submit" class="form__savebutton form_place_elements-grid-savebutton" id="form__savebutton-answer">Да</button>
+      </form>  
+    </div>        
+  </div>
+  <div class="popup" id="popup-chage-avatar">
+    <div class="popup__container popup_container_place_avatar">
+      <button type="button" class="popup__close" id="popup__close-avatar"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form name="form-change-avatar" id="form-change-avatar" class="form">
+        <fieldset class="form__input-container form__input-container-error">
+          <input type="url" name="form-avatar-link" placeholder="Ссылка на новый аватар" id="form-avatar-link" class="form__input form__input_value_link form__input_type_error" required>
+          <span class="form__input-error form__input-error_visible" id="form-avatar-link-error"></span>
+        </fieldset>
+        <button type="submit" class="form__savebutton" id="form__savebutton-change-avatar">Сохранить</button>
+      </form>
     </div>        
   </div>
   <template id="elements-grid__item-template">

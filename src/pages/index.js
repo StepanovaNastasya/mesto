@@ -6,9 +6,11 @@ import {PopupWithImage} from '../components/PopupWithImage.js';
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
 import './index.css'; 
+import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
 
 let validatorFormProfile;
 let validatorFormMesto;
+let validatorFormAvatar;
 
 const buttonOpenEditProfile = document.querySelector('.profile__openpopup');
 const inputEditProfileName = document.querySelector('.form__input_value_name');
@@ -17,6 +19,8 @@ const inputEditProfileProfession = document.querySelector('.form__input_value_pr
 const buttonOpenAddCard = document.querySelector('.profile__button')
 const inputAddCardName = document.querySelector('.form__input_value_image-name');
 const inputAddCardLink = document.querySelector('.form__input_value_link');
+
+const buttonOpenChangeAvatar = document.querySelector('.profile__avatar-button');
 
 const cardsSection = new Section({
   'items': initialCards,
@@ -34,10 +38,25 @@ popupAddCard.setEventListeners();
 const popupFullImage = new PopupWithImage('#popup-image');
 popupFullImage.setEventListeners();
 
+const popupChangeAvatar = new PopupWithForm('#popup-chage-avatar', changeAvatar);
+popupChangeAvatar.setEventListeners();
+
+const popupWithAnswer = new PopupWithConfirm('#popup-answer', deleteCard);
+popupWithAnswer.setEventListeners();
+
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
 
+function changeAvatar({'form-avatar-link': link}) {
+  popupChangeAvatar.close();
+}
+
+function deleteCard(card) {
+  card.delete();
+  popupWithAnswer.close();
+}
+
 function createCard(name, link) {
-  const card = new Card(name, link, '#elements-grid__item-template', popupFullImage.open.bind(popupFullImage));
+  const card = new Card(name, link, '#elements-grid__item-template', popupFullImage.open.bind(popupFullImage), popupWithAnswer.open.bind(popupWithAnswer));
   return card.render();
 }
 
@@ -76,6 +95,9 @@ function enableFormsValidation(config){
 
   validatorFormMesto = new FormValidator(config, document.querySelector('#form-mesto'));
   validatorFormMesto.enableValidation();
+
+  validatorFormAvatar = new FormValidator(config, document.querySelector('#form-change-avatar'));
+  validatorFormAvatar.enableValidation();  
 }
 
 renderInitialCards();
@@ -85,4 +107,8 @@ buttonOpenEditProfile.addEventListener('click', openEditPopup);
 buttonOpenAddCard.addEventListener('click', () => {
   validatorFormMesto.disableButton();
   popupAddCard.open();
+});
+buttonOpenChangeAvatar.addEventListener('click', () => {
+  validatorFormAvatar.disableButton();
+  popupChangeAvatar.open();
 });
