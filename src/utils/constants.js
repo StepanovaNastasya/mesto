@@ -1,37 +1,3 @@
-import cyprus from '../images/cyprus.jpg';
-import georgia from '../images/georgia.jpg';
-import paris from '../images/paris.jpg';
-import saintp from '../images/saint-p.jpg';
-import hamburg from '../images/hamburg-docks.jpg';
-import slovenia from '../images/slovenia.jpg';
-
-const initialCards = [
-  {
-    name: 'Кипр',
-    link: cyprus
-  },
-  {
-    name: 'Грузия',
-    link: georgia
-  },
-  {
-    name: 'Париж',
-    link: paris
-  },
-  {
-    name: 'Гамбург',
-    link: hamburg
-  },
-  {
-    name: 'Санкт-Петербург',
-    link: saintp
-  },
-  {
-    name: 'Словения',
-    link: slovenia
-  }
-];
-
 const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__input',
@@ -41,4 +7,9 @@ const validationConfig = {
   errorClass: 'form__input-error_visible'
 };
 
-export {initialCards, validationConfig };
+const apiConfig = {
+  token: '55c908bc-5ab9-4470-95d0-a17be91146e8',
+  cohortId: 'cohort-60'
+};
+
+export {validationConfig, apiConfig};

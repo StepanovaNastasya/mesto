@@ -1,4 +1,4 @@
-import {initialCards, validationConfig} from '../utils/constants.js';
+import {initialCards, validationConfig, apiConfig} from '../utils/constants.js';
 import {Card} from '../components/Card';
 import { Section } from '../components/Section.js';
 import {FormValidator} from '../components/FormValidator.js';
@@ -7,6 +7,7 @@ import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
 import './index.css'; 
 import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
+import {Api} from '../components/Api.js';
 
 let validatorFormProfile;
 let validatorFormMesto;
@@ -17,17 +18,10 @@ const inputEditProfileName = document.querySelector('.form__input_value_name');
 const inputEditProfileProfession = document.querySelector('.form__input_value_profession');
 
 const buttonOpenAddCard = document.querySelector('.profile__button')
-const inputAddCardName = document.querySelector('.form__input_value_image-name');
-const inputAddCardLink = document.querySelector('.form__input_value_link');
 
 const buttonOpenChangeAvatar = document.querySelector('.profile__avatar-button');
 
-const cardsSection = new Section({
-  'items': initialCards,
-  'renderer': function(card) {
-    return createCard(card.name, card.link);
-  }
-}, '.elements-grid');
+let cardsSection;
 
 const popupEditProfile = new PopupWithForm('#popup-profile', changeProfile);
 popupEditProfile.setEventListeners();
@@ -44,24 +38,66 @@ popupChangeAvatar.setEventListeners();
 const popupWithAnswer = new PopupWithConfirm('#popup-answer', deleteCard);
 popupWithAnswer.setEventListeners();
 
-const userInfo = new UserInfo('.profile__name', '.profile__profession');
+const userInfo = new UserInfo('.profile__name', '.profile__profession', '.profile__avatar');
 
-function changeAvatar({'form-avatar-link': link}) {
-  popupChangeAvatar.close();
+const api = new Api(apiConfig);
+
+function changeAvatar({'form-avatar-link': avatar}) {
+  const newUserInfo = userInfo.getUserInfo();
+  newUserInfo.avatar = avatar;
+
+  return api.updateUserInfoAvatar(newUserInfo).then(result => {
+    userInfo.setUserInfo(result);
+    popupChangeAvatar.close();
+  });
 }
 
 function deleteCard(card) {
-  card.delete();
-  popupWithAnswer.close();
+  api.deleteCard(card.data()).then(response => {
+    card.delete();
+    popupWithAnswer.close();
+  });
 }
 
-function createCard(name, link) {
-  const card = new Card(name, link, '#elements-grid__item-template', popupFullImage.open.bind(popupFullImage), popupWithAnswer.open.bind(popupWithAnswer));
+function createCard(data) {
+  const currentUserId = userInfo.getUserInfo().id;
+  const effectiveData = effectiveCard(data, currentUserId);
+
+  const card = new Card(
+    effectiveData, 
+    '#elements-grid__item-template', 
+    popupFullImage.open.bind(popupFullImage), 
+    popupWithAnswer.open.bind(popupWithAnswer),
+    (hadLike) => {
+      if (!hadLike) {
+        return api.addLike(effectiveData)
+          .then(updatedCard => effectiveCard(updatedCard, currentUserId));
+      } else {
+        return api.removeLike(effectiveData)
+          .then(updatedCard => effectiveCard(updatedCard, currentUserId));
+      }
+    });
   return card.render();
 }
 
+function renderInitialProfile() {
+  return api.getUserInfo().then(result => {
+    return userInfo.setUserInfo(result);
+  });
+}
+
 function renderInitialCards() {
-  cardsSection.renderAll();
+  api.getAllCards()
+     .then(cards => {
+      cardsSection = new Section({
+        'items': cards,
+        'renderer': function(card) {
+          return createCard(card);
+        }
+      }, '.elements-grid');
+      return cardsSection;
+    })
+    .then(section => section.renderAll());
 }
   
 function openEditPopup() {
@@ -75,18 +111,33 @@ function openEditPopup() {
 }
 
 function changeProfile({name, profession}) {
-    userInfo.setUserInfo({
-      'name': name,
-      'profession': profession
-    });
+    const newUserInfo = userInfo.getUserInfo();
+    newUserInfo.name = name;
+    newUserInfo.profession = profession;
 
-    popupEditProfile.close();
+    return api.updateUserInfoTextContent(newUserInfo).then(result => {
+      userInfo.setUserInfo(result);
+      popupEditProfile.close();
+    });
 }
 
 function addCard({'form-name-image': name, 'form-mesto-link': link}) {
-    cardsSection.prependItem(createCard(name, link));
+    return api.addCard({
+      name: name,
+      link: link
+    })
+    .then(card => {
+      cardsSection.prependItem(createCard(card));
+      popupAddCard.close();
+    })
+}
 
-    popupAddCard.close();
+function effectiveCard(card, currentUserId) {
+  let result = card;
+  result.likesCount = result.likesUserIds.length;
+  result.isOwned = result.onwerId == currentUserId;
+  result.isLiked = result.likesUserIds.includes(currentUserId);
+  return result;
 }
 
 function enableFormsValidation(config){
@@ -100,7 +151,7 @@ function enableFormsValidation(config){
   validatorFormAvatar.enableValidation();  
 }
 
-renderInitialCards();
+renderInitialProfile().then(result => renderInitialCards());
 enableFormsValidation(validationConfig);
 
 buttonOpenEditProfile.addEventListener('click', openEditPopup);
