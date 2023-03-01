@@ -53,7 +53,7 @@ function changeAvatar({'form-avatar-link': avatar}) {
 }
 
 function deleteCard(card) {
-  api.deleteCard(card.data()).then(response => {
+  api.deleteCard(card.data()).then(skipped => {
     card.delete();
     popupWithAnswer.close();
   });

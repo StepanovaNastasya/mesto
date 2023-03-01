@@ -11,8 +11,9 @@ export class Api {
         authorization: this._token
       }
     })
-    .then(response => response.json())
-    .then(json => this._convertJsonToUserInfo(json));
+    .then(response => this._getJsonOrReject(response))
+    .then(json => this._convertJsonToUserInfo(json))
+    .catch((err) => console.log(err));
   }
 
   updateUserInfoTextContent(updatedUserInfo) {
@@ -27,8 +28,9 @@ export class Api {
         about: updatedUserInfo.profession
       })
     })
-    .then(response => response.json())
-    .then(json => this._convertJsonToUserInfo(json)); 
+    .then(response => this._getJsonOrReject(response))
+    .then(json => this._convertJsonToUserInfo(json))
+    .catch((err) => console.log(err));
   }
 
   updateUserInfoAvatar(updatedUserInfo) {
@@ -42,8 +44,9 @@ export class Api {
         avatar: updatedUserInfo.avatar
       })
     })
-    .then(response => response.json())
-    .then(json => this._convertJsonToUserInfo(json)); 
+    .then(response => this._getJsonOrReject(response))
+    .then(json => this._convertJsonToUserInfo(json))
+    .catch((err) => console.log(err));
   }
 
   getAllCards() {
@@ -53,8 +56,9 @@ export class Api {
         authorization: this._token
       }
     })
-    .then(response => response.json())
-    .then(json => json.map((item) => this._convertJsonToCard(item)));
+    .then(response => this._getJsonOrReject(response))
+    .then(json => json.map((item) => this._convertJsonToCard(item)))
+    .catch((err) => console.log(err));
   }
 
   addLike(card) {
@@ -64,8 +68,9 @@ export class Api {
         authorization: this._token
       }
     })
-    .then(response => response.json())
-    .then(json => this._convertJsonToCard(json)); 
+    .then(response => this._getJsonOrReject(response))
+    .then(json => this._convertJsonToCard(json))
+    .catch((err) => console.log(err));
   }
 
   removeLike(card) {
@@ -75,8 +80,9 @@ export class Api {
         authorization: this._token
       }
     })
-    .then(response => response.json())
-    .then(json => this._convertJsonToCard(json)); 
+    .then(response => this._getJsonOrReject(response))
+    .then(json => this._convertJsonToCard(json))
+    .catch((err) => console.log(err));
   }
 
   addCard(card) {
@@ -91,8 +97,9 @@ export class Api {
         link: card.link
       })
     })
-    .then(response => response.json())
-    .then(json => this._convertJsonToCard(json));
+    .then(response => this._getJsonOrReject(response))
+    .then(json => this._convertJsonToCard(json))
+    .catch((err) => console.log(err));
   }
 
   deleteCard(card) {
@@ -102,6 +109,24 @@ export class Api {
         authorization: this._token
       }
     })
+    .then(response => this._rejectIfNotOk(response))
+    .catch((err) => console.log(err));
+  }
+
+  _getJsonOrReject(response) {
+    if (response.ok) {
+      return response.json();
+    } else {
+      return Promise.reject(`Ошибка: ${response.status}`);
+    }
+  }
+
+  _rejectIfNotOk(response) {
+    if (response.ok) {
+      return Promise.resolve();
+    } else {
+      return Promise.reject(`Ошибка: ${response.status}`);
+    }
   }
 
   _convertJsonToUserInfo(json) {
