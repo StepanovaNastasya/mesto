@@ -1006,10 +1006,10 @@ template {
   z-index: 1;
   background-color: rgba(0, 0, 0, 0);
 }
-.popup_container_place_elements-grid {
+.popup__container_place_elements-grid {
   min-height: 181px;
 }
-.popup_container_place_avatar{
+.popup__container_place_avatar{
   min-height: 272px;
 }
 .popup__description {
@@ -1173,7 +1173,7 @@ template {
   text-align: center;
   color: #000000;
 } 
-.form_place_elements-grid-savebutton {
+.form__savebutton_place_elements-grid-savebutton {
   margin-top: 38px;
 }
 
