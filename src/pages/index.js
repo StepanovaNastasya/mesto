@@ -1,4 +1,4 @@
-import {initialCards, validationConfig, apiConfig} from '../utils/constants.js';
+import {validationConfig, apiConfig, buttonOpenEditProfile, inputEditProfileName, inputEditProfileProfession, buttonOpenAddCard, buttonOpenChangeAvatar} from '../utils/constants.js';
 import {Card} from '../components/Card';
 import { Section } from '../components/Section.js';
 import {FormValidator} from '../components/FormValidator.js';
@@ -12,14 +12,6 @@ import {Api} from '../components/Api.js';
 let validatorFormProfile;
 let validatorFormMesto;
 let validatorFormAvatar;
-
-const buttonOpenEditProfile = document.querySelector('.profile__openpopup');
-const inputEditProfileName = document.querySelector('.form__input_value_name');
-const inputEditProfileProfession = document.querySelector('.form__input_value_profession');
-
-const buttonOpenAddCard = document.querySelector('.profile__button')
-
-const buttonOpenChangeAvatar = document.querySelector('.profile__avatar-button');
 
 let cardsSection;
 
@@ -46,49 +38,50 @@ function changeAvatar({'form-avatar-link': avatar}) {
   const newUserInfo = userInfo.getUserInfo();
   newUserInfo.avatar = avatar;
 
-  return api.updateUserInfoAvatar(newUserInfo).then(result => {
-    userInfo.setUserInfo(result);
-    popupChangeAvatar.close();
-  });
+  const submitButtonOldText = popupChangeAvatar.getSubmitButtonText();
+  popupChangeAvatar.setSubmitButtonText('Сохранение...');
+
+  api.updateUserInfoAvatar(newUserInfo)
+    .then(result => {
+      userInfo.setUserInfo(result);
+      popupChangeAvatar.close();
+    })
+    .catch(err => console.log(err))
+    .finally(() => popupChangeAvatar.setSubmitButtonText(submitButtonOldText));
 }
 
 function deleteCard(card) {
-  api.deleteCard(card.data()).then(skipped => {
-    card.delete();
-    popupWithAnswer.close();
-  });
+  api.deleteCard(card.data())
+    .then(skipped => {
+      card.delete();
+      popupWithAnswer.close();
+    })
+    .catch(err => console.log(err));
 }
 
 function createCard(data) {
-  const currentUserId = userInfo.getUserInfo().id;
-  const effectiveData = effectiveCard(data, currentUserId);
-
+  data.currentUserId = userInfo.getUserInfo().id;
+  
   const card = new Card(
-    effectiveData, 
+    data, 
     '#elements-grid__item-template', 
     popupFullImage.open.bind(popupFullImage), 
     popupWithAnswer.open.bind(popupWithAnswer),
     (hadLike) => {
       if (!hadLike) {
-        return api.addLike(effectiveData)
-          .then(updatedCard => effectiveCard(updatedCard, currentUserId));
+        return api.addLike(data);
       } else {
-        return api.removeLike(effectiveData)
-          .then(updatedCard => effectiveCard(updatedCard, currentUserId));
+        return api.removeLike(data);
       }
     });
   return card.render();
 }
 
-function renderInitialProfile() {
-  return api.getUserInfo().then(result => {
-    return userInfo.setUserInfo(result);
-  });
-}
-
-function renderInitialCards() {
-  api.getAllCards()
-     .then(cards => {
+function renderInitialState() {
+  api.getUserInfo()
+    .then(result => userInfo.setUserInfo(result))
+    .then(skipped => api.getAllCards())
+    .then(cards => {
       cardsSection = new Section({
         'items': cards,
         'renderer': function(card) {
@@ -97,7 +90,8 @@ function renderInitialCards() {
       }, '.elements-grid');
       return cardsSection;
     })
-    .then(section => section.renderAll());
+    .then(section => section.renderAll())
+    .catch(err => console.log(err));
 }
   
 function openEditPopup() {
@@ -111,33 +105,34 @@ function openEditPopup() {
 }
 
 function changeProfile({name, profession}) {
-    const newUserInfo = userInfo.getUserInfo();
-    newUserInfo.name = name;
-    newUserInfo.profession = profession;
+    const newUserInfo = {
+      'name': name,
+      'profession': profession
+    };
+    
+    const submitButtonOldText = popupEditProfile.getSubmitButtonText();
+    popupEditProfile.setSubmitButtonText('Сохранение...');
 
-    return api.updateUserInfoTextContent(newUserInfo).then(result => {
-      userInfo.setUserInfo(result);
-      popupEditProfile.close();
-    });
+    api.updateUserInfoTextContent(newUserInfo)
+      .then(result => {
+        userInfo.setUserInfo(result);
+        popupEditProfile.close();
+      })
+      .catch(err => console.log(err))
+      .finally(() => popupEditProfile.setSubmitButtonText(submitButtonOldText));
 }
 
 function addCard({'form-name-image': name, 'form-mesto-link': link}) {
-    return api.addCard({
-      name: name,
-      link: link
-    })
+  const submitButtonOldText = popupAddCard.getSubmitButtonText();
+  popupAddCard.setSubmitButtonText('Сохранение...');
+
+  api.addCard({name: name, link: link})
     .then(card => {
       cardsSection.prependItem(createCard(card));
       popupAddCard.close();
     })
-}
-
-function effectiveCard(card, currentUserId) {
-  let result = card;
-  result.likesCount = result.likesUserIds.length;
-  result.isOwned = result.onwerId == currentUserId;
-  result.isLiked = result.likesUserIds.includes(currentUserId);
-  return result;
+    .catch(err => console.log(err))
+    .finally(() => popupAddCard.setSubmitButtonText(submitButtonOldText));
 }
 
 function enableFormsValidation(config){
@@ -151,7 +146,7 @@ function enableFormsValidation(config){
   validatorFormAvatar.enableValidation();  
 }
 
-renderInitialProfile().then(result => renderInitialCards());
+renderInitialState();
 enableFormsValidation(validationConfig);
 
 buttonOpenEditProfile.addEventListener('click', openEditPopup);

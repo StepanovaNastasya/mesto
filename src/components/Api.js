@@ -12,8 +12,7 @@ export class Api {
       }
     })
     .then(response => this._getJsonOrReject(response))
-    .then(json => this._convertJsonToUserInfo(json))
-    .catch((err) => console.log(err));
+    .then(json => this._convertJsonToUserInfo(json));
   }
 
   updateUserInfoTextContent(updatedUserInfo) {
@@ -29,8 +28,7 @@ export class Api {
       })
     })
     .then(response => this._getJsonOrReject(response))
-    .then(json => this._convertJsonToUserInfo(json))
-    .catch((err) => console.log(err));
+    .then(json => this._convertJsonToUserInfo(json));
   }
 
   updateUserInfoAvatar(updatedUserInfo) {
@@ -45,8 +43,7 @@ export class Api {
       })
     })
     .then(response => this._getJsonOrReject(response))
-    .then(json => this._convertJsonToUserInfo(json))
-    .catch((err) => console.log(err));
+    .then(json => this._convertJsonToUserInfo(json));
   }
 
   getAllCards() {
@@ -57,8 +54,7 @@ export class Api {
       }
     })
     .then(response => this._getJsonOrReject(response))
-    .then(json => json.map((item) => this._convertJsonToCard(item)))
-    .catch((err) => console.log(err));
+    .then(json => json.map((item) => this._convertJsonToCard(item)));
   }
 
   addLike(card) {
@@ -69,8 +65,7 @@ export class Api {
       }
     })
     .then(response => this._getJsonOrReject(response))
-    .then(json => this._convertJsonToCard(json))
-    .catch((err) => console.log(err));
+    .then(json => this._convertJsonToCard(json));
   }
 
   removeLike(card) {
@@ -81,8 +76,7 @@ export class Api {
       }
     })
     .then(response => this._getJsonOrReject(response))
-    .then(json => this._convertJsonToCard(json))
-    .catch((err) => console.log(err));
+    .then(json => this._convertJsonToCard(json));
   }
 
   addCard(card) {
@@ -98,8 +92,7 @@ export class Api {
       })
     })
     .then(response => this._getJsonOrReject(response))
-    .then(json => this._convertJsonToCard(json))
-    .catch((err) => console.log(err));
+    .then(json => this._convertJsonToCard(json));
   }
 
   deleteCard(card) {
@@ -109,8 +102,7 @@ export class Api {
         authorization: this._token
       }
     })
-    .then(response => this._rejectIfNotOk(response))
-    .catch((err) => console.log(err));
+    .then(response => this._rejectIfNotOk(response));
   }
 
   _getJsonOrReject(response) {
@@ -148,16 +140,3 @@ export class Api {
     }
   }
 }
-
-
-// method: "POST", // *GET, POST, PUT, DELETE, etc.
-//     mode: "cors", // no-cors, *cors, same-origin
-//     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-//     credentials: "same-origin", // include, *same-origin, omit
-//     headers: {
-//       "Content-Type": "application/json",
-//       // 'Content-Type': 'application/x-www-form-urlencoded',
-//     },
-//     redirect: "follow", // manual, *follow, error
-//     referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-//     body: JSON.stringify(data), 

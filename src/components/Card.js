@@ -3,9 +3,9 @@ export class Card {
     this._id = data.id;
     this._name = data.name;
     this._link = data.link;
-    this._likesCount = data.likesCount;
-    this._isOwned = data.isOwned;
-    this._isLiked = data.isLiked;
+    this._likesUserIds = data.likesUserIds;
+    this._currentUserId = data.currentUserId;
+    this._isOwned = data.onwerId == data.currentUserId;
     this._element = document.querySelector(templateSelector).content.firstElementChild.cloneNode(true);
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
@@ -34,7 +34,7 @@ export class Card {
   _addListeners() {
     this._element.querySelector('.elements-grid__button').addEventListener('click', () => this._makeLike());
     this._element.querySelector('.elements-grid__image').addEventListener('click', () => this._openFullImagePopup());
-    if (this._isMyCard) {
+    if (this._isOwned) {
       this._element.querySelector('.elements-grid__trash').addEventListener('click', () => this._handleDeleteClick(this));
     }
   }
@@ -59,13 +59,13 @@ export class Card {
   }
 
   _makeLike() {
-    this._handleMakeLike(this._isLiked).then(card => {
-      this._isLiked = card.isLiked;
-      this._likesCount = card.likesCount;
-
-      this._syncLikeButton();
-      this._syncLikesCounter();
-    });
+    this._handleMakeLike(this._isLiked())
+      .then(card => {
+        this._likesUserIds = card.likesUserIds;
+        this._syncLikeButton();
+        this._syncLikesCounter();
+      })
+      .catch((err) => console.log(err));
   } 
   
   _openFullImagePopup() {
@@ -73,14 +73,18 @@ export class Card {
   }
 
   _syncLikesCounter() {
-    this._likesCounter.textContent = this._likesCount;
+    this._likesCounter.textContent = this._likesUserIds.length;
   }
 
   _syncLikeButton() {
-    if (this._isLiked) {
+    if (this._isLiked()) {
       this._likeButton.classList.add('selected');
     } else {
       this._likeButton.classList.remove('selected');
     }
+  }
+
+  _isLiked() {
+    return this._likesUserIds.includes(this._currentUserId);
   }
 }

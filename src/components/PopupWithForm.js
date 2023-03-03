@@ -21,17 +21,20 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
     this.form.addEventListener('submit', (event) => {
       event.preventDefault()
-
-      const buttonOldText = this.button.textContent;
-      this.button.textContent = 'Сохранение...'
-
-      this.submit(this._getInputValues())
-        .then(skipped => this.button.textContent = buttonOldText);
+      this.submit(this._getInputValues());
     });
   }
 
   close() {
     super.close();
     this.form.reset();
+  }
+
+  getSubmitButtonText() {
+    return this.button.textContent;
+  }
+
+  setSubmitButtonText(newText) {
+    this.button.textContent = newText;
   }
 }

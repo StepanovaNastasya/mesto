@@ -12,4 +12,10 @@ const apiConfig = {
   cohortId: 'cohort-60'
 };
 
-export {validationConfig, apiConfig};
+const buttonOpenAddCard = document.querySelector('.profile__button')
+const buttonOpenEditProfile = document.querySelector('.profile__openpopup');
+const inputEditProfileName = document.querySelector('.form__input_value_name');
+const buttonOpenChangeAvatar = document.querySelector('.profile__avatar-button');
+const inputEditProfileProfession = document.querySelector('.form__input_value_profession');
+
+export {validationConfig, apiConfig, buttonOpenEditProfile, inputEditProfileName, inputEditProfileProfession, buttonOpenAddCard, buttonOpenChangeAvatar};
