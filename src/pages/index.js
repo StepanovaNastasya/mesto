@@ -60,7 +60,7 @@ function deleteCard(card) {
 }
 
 function createCard(data) {
-  data.currentUserId = userInfo.getUserInfo().id;
+  data.currentUserId = userInfo.getUserId();
   
   const card = new Card(
     data, 

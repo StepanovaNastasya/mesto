@@ -5,6 +5,10 @@ export class UserInfo {
     this.avatar = document.querySelector(avatarSelector);
   }
 
+  getUserId() {
+    return this.id;
+  }
+
   getUserInfo() {
     return {
       'id': this.id,
